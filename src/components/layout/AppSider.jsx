@@ -1,12 +1,12 @@
-import {Layout, Card, Statistic, List, Typography, Spin} from 'antd';
+import {Layout, Card, Statistic, List, Typography, Spin, Tag} from 'antd';
 import {ArrowUpOutlined, ArrowDownOutlined} from '@ant-design/icons'
 import {useEffect, useState} from 'react'
 import {fakeFetchAssets, fakeFetchCrypto} from "../../api";
-import {percentDiffCounter} from '../../utils'
+import {percentDiffCounter, capitalize} from '../../utils'
 
 const siderStyle = {
-   padding: '1rem',
-
+   padding: '0.5rem',
+   backgroundColor: '#087ea4',
 };
 
 export default function AppSider() {
@@ -24,7 +24,7 @@ export default function AppSider() {
             setAssets(assets.map((asset) => {
                 const coin = result.find((c) => c.id === asset.id);
                 return {
-                    grow: asset.price >  coin.price, // boolean
+                    grow: asset.price  <  coin.price, // boolean
                     growPercent: percentDiffCounter(asset.price, coin.price),
                     totalAmount: asset.amount * coin.price,
                     totalProfit: asset.amount * coin.price - asset.amount * asset.price,
@@ -38,7 +38,7 @@ export default function AppSider() {
         preload()
     }, []);
     
-    if (loading) {
+    if (loading) { //Спин во время загрузки
         return(
             <Spin spinning={loading} fullscreen/>
         )
@@ -49,26 +49,39 @@ export default function AppSider() {
             {assets.map((asset) => (
                 <Card key={asset.id} style={{marginBottom: '1rem'}}>
                     <Statistic
-                        title={asset.id}
+                        title={capitalize(asset.id)}
                         value={asset.totalAmount}
                         precision={3}
                         valueStyle={{
-                            color: (asset.grow) ? '#cf1322' : '#3f8600',
+                            color: (asset.grow) ? '#3f8600' : '#cf1322',
                         }}
-                        prefix={asset.grow ? <ArrowDownOutlined /> : <ArrowUpOutlined />}
+                        prefix={asset.grow ? <ArrowUpOutlined /> : <ArrowDownOutlined />}
                         suffix="$"
                     />
                     <List
                         size='small'
                         dataSource={[
-                            {title: 'Total Profit', value: asset.totalProfit},
-                            {title: 'Asset Amount', value: asset.amount},
-                            {title: 'Difference', value: asset.growPercent},
+                            {title: 'Total Profit', value: asset.totalProfit, withTag: true},
+                            {title: 'Asset Amount', value: asset.amount, isPlain: true},
                         ]}
                         renderItem={(item) => (
                             <List.Item>
                                 <span>{item.title}</span>
-                                <span>{item.value}</span>
+                                <span>
+                                    {item.withTag && (
+                                        <Tag color={asset.grow ? 'green' : 'red'}>{asset.growPercent}%</Tag>
+                                    )}
+                                    {item.isPlain && (
+                                        <Typography.Text>
+                                            {item.value.toFixed(2)}
+                                            </Typography.Text>
+                                    )}
+                                    {!item.isPlain && (
+                                        <Typography.Text type={asset.grow ? 'success' : 'danger'}>
+                                            {item.value.toFixed(2)}$
+                                        </Typography.Text>
+                                    )}
+                                </span>
                             </List.Item>
                         )}
                     />
