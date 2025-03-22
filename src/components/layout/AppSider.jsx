@@ -1,8 +1,7 @@
 import {Layout, Card, Statistic, List, Typography, Spin, Tag} from 'antd';
 import {ArrowUpOutlined, ArrowDownOutlined} from '@ant-design/icons'
-import {useEffect, useState} from 'react'
-import {fakeFetchAssets, fakeFetchCrypto} from "../../api";
-import {percentDiffCounter, capitalize} from '../../utils'
+import {capitalize} from '../../utils'
+import {useCryptoContext} from "../../context/CryptoContext";
 
 const siderStyle = {
    padding: '0.5rem',
@@ -10,43 +9,11 @@ const siderStyle = {
 };
 
 export default function AppSider() {
+    const cryptoContext = useCryptoContext();
 
-    const [loading, setLoading] = useState(true); // state загрузочного экрана
-    const [assets, setAssets] = useState([]);
-    const [crypto, setCrypto] = useState([]);
-
-    useEffect(() => {
-        async function preload() {
-            setLoading(true);
-            const assets = await fakeFetchAssets();
-            const {result} = await fakeFetchCrypto();
-
-            setAssets(assets.map((asset) => {
-                const coin = result.find((c) => c.id === asset.id);
-                return {
-                    grow: asset.price  <  coin.price, // boolean
-                    growPercent: percentDiffCounter(asset.price, coin.price),
-                    totalAmount: asset.amount * coin.price,
-                    totalProfit: asset.amount * coin.price - asset.amount * asset.price,
-                    ...asset,
-                }
-            }));
-            setCrypto(result);
-
-            setLoading(false);
-        }
-        preload()
-    }, []);
-    
-    if (loading) { //Спин во время загрузки
-        return(
-            <Spin spinning={loading} fullscreen/>
-        )
-    }
-    
     return(
-        <Layout.Sider width="25%" style={siderStyle}>
-            {assets.map((asset) => (
+        <Layout.Sider width="23%" style={siderStyle}>
+            {cryptoContext.assets.map((asset) => (
                 <Card key={asset.id} style={{marginBottom: '1rem'}}>
                     <Statistic
                         title={capitalize(asset.id)}
