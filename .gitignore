@@ -1,0 +1,45 @@
+# 1. Исключаем зависимости
+node_modules/
+package-lock.json
+pnpm-lock.yaml
+yarn.lock
+
+# 2. Кеш и логи
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+vite-error.log
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+
+# 3. Файлы окружения
+.env
+.env.local
+.env.*.local
+.md
+
+# 4. Исключаем сборочные артефакты
+dist/
+build/
+out/
+coverage/
+*.log
+
+# 5. Кеши и временные файлы
+.cache/
+.tmp/
+*.bak
+
+# 6. Файлы IDE и редакторов
+.vscode/
+*.code-workspace
+.idea/
+*.iml
+
+# 7. Git-метаданные
+.git/
