@@ -1,4 +1,4 @@
-import {Layout, Card, Statistic, List, Typography, Spin, Tag} from 'antd';
+import {Layout, Card, Statistic, List, Typography, Tag} from 'antd';
 import {ArrowUpOutlined, ArrowDownOutlined} from '@ant-design/icons'
 import {capitalize} from '../../utils'
 import {useCryptoContext} from "../../context/CryptoContext";
@@ -6,13 +6,17 @@ import {useCryptoContext} from "../../context/CryptoContext";
 const siderStyle = {
    padding: '0.5rem',
    backgroundColor: '#087ea4',
+   height: 'calc(100vh - 60px)',
+   overflowY: 'scroll',
+   scrollbarWidth: 'thin',
+   scrollbarColor: '#84bfd2 white',
 };
 
 export default function AppSider() {
     const cryptoContext = useCryptoContext();
 
     return(
-        <Layout.Sider width="23%" style={siderStyle}>
+        <Layout.Sider width="24%" style={siderStyle}>
             {cryptoContext.assets.map((asset) => (
                 <Card key={asset.id} style={{marginBottom: '1rem'}}>
                     <Statistic

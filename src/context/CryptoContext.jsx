@@ -12,7 +12,7 @@ const CryptoContext = createContext({
 
 export const useCryptoContext = () => {
     return useContext(CryptoContext);
-};//
+};//CryptoContext - приватная переменная, получать контекст через эту функцию
 
 export function CryptoContextProvider({children}) {
     const [loading, setLoading] = useState(true); // state загрузочного экрана
