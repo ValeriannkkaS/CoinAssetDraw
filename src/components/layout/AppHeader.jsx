@@ -1,6 +1,8 @@
-import {Layout, Select, Space, Button} from "antd";
+import {Layout, Select, Space, Button, Modal, Drawer} from "antd";
 import {useCryptoContext} from "../../context/CryptoContext";
 import {useState, useEffect} from 'react';
+import CoinInfoModal from "../CoinInfoModal";
+import AddAssetsForDraw from "../AddAssetsForDraw";
 
 
 const headerStyle = {
@@ -15,6 +17,11 @@ const headerStyle = {
 
 export default function AppHeader() {
     const [select, setSelect] = useState(false);
+    const [modal, setModal] = useState(false);
+    const [drawer, setDrawer] = useState(false);
+    const [coin, setCoin] = useState(null);
+
+    const { crypto } = useCryptoContext();
 
     useEffect( () => {
         const keypress = (event) => {
@@ -23,16 +30,17 @@ export default function AppHeader() {
             }
         };
 
-        document.addEventListener("keypress", keypress);
+        document.addEventListener('keypress', keypress);
 
-        return () => document.removeEventListener()
+        return () => document.removeEventListener('keypress', keypress)
     }, []);
 
-    const { crypto } = useCryptoContext();
-
     function handleSelect(value){
-        console.log(value);
+        setModal((prev) => !prev);
+        setCoin((prev) => crypto.find((coin) => coin.id === value));
+        console.log(coin)
     }
+
 
     return(
         <Layout.Header style={headerStyle}>
@@ -44,7 +52,6 @@ export default function AppHeader() {
                 onSelect={handleSelect}
                 onClick={() => setSelect((prev) => !prev)}
                 value='press / to open'
-                optionLabelProp='label'
                 options={crypto.map( (coin) => {
                     return {
                         value: coin.id,
@@ -64,7 +71,30 @@ export default function AppHeader() {
                     </Space>
                 )}
             />
-            <Button type='primary'>Add Asset</Button>
+
+            <Modal
+                title="Basic Modal"
+                open={modal}
+                onOk={() => setModal(false)}
+                onCancel={() => setModal(false)}
+                footer={null}
+            >
+                <CoinInfoModal coin={coin}/>
+            </Modal>
+            <Drawer
+                size="large"
+                title="Basic Drawer"
+                onClose={() => setDrawer(false)}
+                open={drawer}
+            >
+                <AddAssetsForDraw/>
+            </Drawer>
+            <Button
+                type='primary'
+                onClick={() => setDrawer(true)}
+            >
+                Add Asset
+            </Button>
         </Layout.Header>
     )
 }
