@@ -28,7 +28,7 @@ export default function AppSider() {
                         value={asset.totalAmount}
                         precision={3}
                         valueStyle={{
-                            color: (asset.grow) ? '#3f8600' : '#cf1322',
+                            color: (asset.grow) ? theme.cards.positiveText : theme.cards.negativeText,
                         }}
                         prefix={asset.grow ? <ArrowUpOutlined /> : <ArrowDownOutlined />}
                         suffix="$"
@@ -47,9 +47,9 @@ export default function AppSider() {
                                         <Tag color={asset.grow ? 'green' : 'red'}>{asset.growPercent}%</Tag>
                                     )}
                                     {item.isPlain && (
-                                        <Typography.Text>
-                                            {item.value.toFixed(2)}
-                                            </Typography.Text>
+                                            <>
+                                                {item.value.toFixed(2)}
+                                            </>
                                     )}
                                     {!item.isPlain && (
                                         <Typography.Text type={asset.grow ? 'success' : 'danger'}>

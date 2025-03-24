@@ -28,15 +28,24 @@ export default function AppHeader() {
     const { crypto } = useCryptoContext();
 
     useEffect( () => {
+        let pressed = new Set();
         const keypress = (event) => {
-            if(event.key === '/') {
-                setSelect((prev) => !prev)
+            pressed.add(event.key);
+            if (!pressed.has('Alt') || !pressed.has('Enter')) {
+                return
             }
+            setSelect((prev) => !prev);
         };
+        const keyup = (event) => {
+            pressed.delete(event.key)
+        };
+        document.addEventListener('keydown', keypress);
+        document.addEventListener('keyup', keyup);
 
-        document.addEventListener('keypress', keypress);
-
-        return () => document.removeEventListener('keypress', keypress)
+        return (() => {
+            document.removeEventListener('keydown', keypress);
+            document.removeEventListener('keyup', keyup)
+        })
     }, []);
 
     function handleSelect(value){
@@ -62,7 +71,7 @@ export default function AppHeader() {
                 open={select}
                 onSelect={handleSelect}
                 onClick={() => setSelect((prev) => !prev)}
-                value='press / to open'
+                value='press Alt+Enter to open/close'
                 options={crypto.map( (coin) => {
                     return {
                         value: coin.id,

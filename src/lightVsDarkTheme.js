@@ -25,6 +25,7 @@ export const lightTheme = {
         border: "#E0E4EA",
         positiveText: "#2BAA66",
         negativeText: "#E14D4D",
+        text: "#2C3E50",
     },
 
     slidingSidebar: {
@@ -83,11 +84,12 @@ export const darkTheme = {
     },
 
     cards: {
-        background: "#2A2F34",
+        background: "#262626",
         shadow: "rgba(255, 255, 255, 0.03)",
         border: "#3F464D",
         positiveText: "#3DDC84",
         negativeText: "#FF7676",
+        text: "#f5f5f5",
     },
 
     slidingSidebar: {
