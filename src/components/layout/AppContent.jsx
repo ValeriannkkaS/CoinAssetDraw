@@ -1,15 +1,22 @@
 import {Layout} from "antd";
+import {useThemeContext} from "../../context/ThemeContext";
 
 const contentStyle = {
     textAlign: 'center',
     minHeight: 'calc(100vh - 60px)',
-    color: '#fff',
-    backgroundColor: '#001529',
     padding: '1rem'
 };
 
 export default function AppContent() {
+    const {theme} = useThemeContext();
+
     return(
-        <Layout.Content style={contentStyle}>Content</Layout.Content>
+        <Layout.Content style={{
+            backgroundColor: theme.content.background,
+            color: theme.content.text,
+            ...contentStyle
+        }}>
+            Content
+        </Layout.Content>
     )
 }

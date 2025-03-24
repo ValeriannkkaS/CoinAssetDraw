@@ -1,8 +1,10 @@
-import {Layout, Select, Space, Button, Modal, Drawer} from "antd";
+import {Layout, Select, Space, Button, Modal, Drawer, Switch, Flex} from "antd";
+import {SunOutlined , MoonOutlined} from '@ant-design/icons'
 import {useCryptoContext} from "../../context/CryptoContext";
 import {useState, useEffect} from 'react';
 import CoinInfoModal from "../CoinInfoModal";
 import AddAssetsForDraw from "../AddAssetsForDraw";
+import {useThemeContext} from "../../context/ThemeContext";
 
 
 const headerStyle = {
@@ -15,12 +17,14 @@ const headerStyle = {
     alignItems: 'center',
 };
 
+
 export default function AppHeader() {
     const [select, setSelect] = useState(false);
     const [modal, setModal] = useState(false);
     const [drawer, setDrawer] = useState(false);
     const [coin, setCoin] = useState(null);
 
+    const { theme, toggleTheme } = useThemeContext();
     const { crypto } = useCryptoContext();
 
     useEffect( () => {
@@ -37,16 +41,23 @@ export default function AppHeader() {
 
     function handleSelect(value){
         setModal((prev) => !prev);
-        setCoin((prev) => crypto.find((coin) => coin.id === value));
+        setCoin(crypto.find((coin) => coin.id === value));
         console.log(coin)
     }
 
 
     return(
-        <Layout.Header style={headerStyle}>
+        <Layout.Header style={{
+            backgroundColor: theme.header.background,
+            color: theme.header.text,
+            border: '1px solid' + theme.header.border,
+            ...headerStyle,
+        }}>
             <Select
                 style={{
-                    width: 250
+                    width: 250,
+                    flex: 1,
+                    maxWidth: 250,
                 }}
                 open={select}
                 onSelect={handleSelect}
@@ -89,12 +100,26 @@ export default function AppHeader() {
             >
                 <AddAssetsForDraw/>
             </Drawer>
-            <Button
-                type='primary'
-                onClick={() => setDrawer(true)}
+            <Flex
+            align="center"
+            gap={20}
             >
-                Add Asset
-            </Button>
+
+                <Switch
+                    checkedChildren={<SunOutlined />}
+                    unCheckedChildren={<MoonOutlined />}
+                    onChange={() => {
+                        toggleTheme();
+                    }}
+                />
+                <Button
+                    type='primary'
+                    onClick={() => setDrawer(true)}
+                >
+                    {'Add Asset'}
+                </Button>
+            </Flex>
         </Layout.Header>
     )
 }
+
