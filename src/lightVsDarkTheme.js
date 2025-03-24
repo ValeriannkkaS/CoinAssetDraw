@@ -32,6 +32,7 @@ export const lightTheme = {
         background: "#FFFFFF",
         shadow: "rgba(0, 0, 0, 0.15)",
         border: "#D1D5DB",
+        text: "#212529",
     },
 
     buttons: {
@@ -58,6 +59,7 @@ export const lightTheme = {
         background: "#FFFFFF",
         shadow: "rgba(0, 0, 0, 0.2)",
         border: "#D1D5DB",
+        text: "#212529",
     },
 };
 
@@ -96,6 +98,7 @@ export const darkTheme = {
         background: "#2A2F34",
         shadow: "rgba(255, 255, 255, 0.1)",
         border: "#3F464D",
+        text: "#EAEAEA",
     },
 
     buttons: {
@@ -122,6 +125,7 @@ export const darkTheme = {
         background: "#25292E",
         shadow: "rgba(255, 255, 255, 0.15)",
         border: "#3F464D",
+        text: "#EAEAEA",
     },
 };
 

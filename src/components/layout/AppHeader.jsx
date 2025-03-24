@@ -93,7 +93,7 @@ export default function AppHeader() {
             />
 
             <Modal
-                title="Basic Modal"
+                title="information about cryptocurrency:"
                 open={modal}
                 onOk={() => setModal(false)}
                 onCancel={() => setModal(false)}

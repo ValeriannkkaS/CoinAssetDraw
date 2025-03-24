@@ -33,6 +33,18 @@ export default function ConfigProviderForElements( { children } ) {
                     List: {
                         colorText: theme.cards.text,
                     },
+                    Drawer: {
+                        colorBgElevated: theme.slidingSidebar.background,
+                        colorText: theme.slidingSidebar.text,
+                        colorIcon: theme.slidingSidebar.text,
+                    },
+                    Modal: {
+                        contentBg: theme.modal.background,
+                        colorText: theme.modal.text,
+                        titleColor: theme.modal.text,
+                        headerBg: theme.modal.background,
+                        colorIcon: theme.modal.text,
+                    },
                     Input: {
                         colorPrimary: '#eb2f96',
                         algorithm: true, // Enable algorithm
