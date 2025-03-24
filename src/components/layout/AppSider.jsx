@@ -1,8 +1,10 @@
-import {Layout, Card, Statistic, List, Typography, Tag} from 'antd';
+import {Layout, Card, Statistic, List, Typography, Tag, Modal, Divider} from 'antd';
 import {ArrowUpOutlined, ArrowDownOutlined} from '@ant-design/icons'
 import {capitalize} from '../../utils'
 import {useCryptoContext} from "../../context/CryptoContext";
 import {useThemeContext} from "../../context/ThemeContext";
+import CoinInfoModal from "../CoinInfoModal";
+import {useState} from 'react'
 
 const siderStyle = {
    padding: '0.5rem',
@@ -12,6 +14,9 @@ const siderStyle = {
 };
 
 export default function AppSider() {
+    const [modal, setModal] = useState(false);
+    const [coin, setCoin] = useState(null);
+
     const cryptoContext = useCryptoContext();
     const {theme} = useThemeContext();
 
@@ -22,7 +27,16 @@ export default function AppSider() {
             ...siderStyle
         }}>
             {cryptoContext.assets.map((asset) => (
-                <Card key={asset.id} style={{marginBottom: '1rem'}}>
+                <Card
+                    key={asset.id}
+                    style={{marginBottom: '1rem'}}
+                    hoverable
+                    onClick={() => {
+                        setModal(true);
+                        setCoin(cryptoContext.crypto.find((coin) => coin.id === asset.id));
+                        console.log(asset.id)
+                    }}
+                >
                     <Statistic
                         title={capitalize(asset.id)}
                         value={asset.totalAmount}
@@ -62,6 +76,18 @@ export default function AppSider() {
                     />
                 </Card>
             ))}
+            <Modal
+                title="information about cryptocurrency:"
+                open={modal}
+                onOk={() => setModal(false)}
+                onCancel={() => setModal(false)}
+                footer={null}
+            >
+
+                <CoinInfoModal coin={coin}/>
+                <Divider/>
+
+            </Modal>
         </Layout.Sider>
     )
 }
