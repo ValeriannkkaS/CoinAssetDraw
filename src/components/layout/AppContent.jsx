@@ -7,7 +7,9 @@ import AssetsTable from "../AssetsTable";
 const contentStyle = {
     textAlign: 'center',
     minHeight: 'calc(100vh - 60px)',
-    padding: '1rem'
+    padding: '1rem',
+    overflowY: 'scroll',
+    scrollbarWidth: 'thin',
 };
 
 export default function AppContent() {
@@ -23,6 +25,7 @@ export default function AppContent() {
         <Layout.Content style={{
             backgroundColor: theme.content.background,
             color: theme.content.text,
+            scrollbarColor: theme.sidebar.scrollbar,
             ...contentStyle
         }}>
             <Typography.Title level={3} style={{

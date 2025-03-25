@@ -50,11 +50,13 @@ export default function AssetsTable() {
 
     return(
         <div style={{
-            maxHeight: '100px'
+            marginBottom: '1rem'
         }}>
         <Table
+            margin='1rem'
             style={{
                 maxHeight: '20px'
+
             }}
             pagination={false}
             columns={columns}

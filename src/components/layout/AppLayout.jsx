@@ -3,6 +3,7 @@ import {Layout, Spin} from "antd";
 import AppSider from "./AppSider";
 import AppContent from "./AppContent";
 import {useCryptoContext} from "../../context/CryptoContext";
+import AppFooter from "./AppFooter";
 
 export default function AppLayout() {
     const {loading} = useCryptoContext();
@@ -18,6 +19,7 @@ export default function AppLayout() {
                 <AppSider/>
                 <AppContent/>
             </Layout>
+            <AppFooter/>
         </Layout>
     )
 }
