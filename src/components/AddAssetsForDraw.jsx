@@ -2,6 +2,8 @@ import { useState, useRef } from 'react'
 import {Flex, Select, Space, Typography, Divider, Form, Input, Button, Checkbox, InputNumber, DatePicker, Result} from "antd";
 import {useCryptoContext} from "../context/CryptoContext";
 import CoinImageDescription from "./CoinImageDescription";
+import {dateToString} from "../utils";
+import {getPriceByTime} from "../fetch";
 
 const validateMessages = {
   required: '${label} is required',
@@ -109,6 +111,18 @@ export default function AddAssetsForDraw( {onClose} ) {
             total: +(value * amount).toFixed(2),
         })
     }
+    async function handleDateChange(value) {
+        const amount = form.getFieldValue('amount');
+        console.log(value);
+        const date = dateToString(value);
+        const price = await getPriceByTime(date, coin.id);
+        console.log(price);
+        form.setFieldsValue({
+            price: price,
+            total: price * amount,
+        })
+
+    }
     return(
         <>
             <Flex align="center">
@@ -172,6 +186,7 @@ export default function AddAssetsForDraw( {onClose} ) {
                     name="date&time"
                 >
                    <DatePicker
+                       onChange={handleDateChange}
                        style={{
                        width: '100%'
                    }}
