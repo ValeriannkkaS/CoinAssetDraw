@@ -107,7 +107,7 @@ export default function AppHeader() {
                 onClose={() => setDrawer(false)}
                 open={drawer}
             >
-                <AddAssetsForDraw/>
+                <AddAssetsForDraw onClose={() => setDrawer(false)}/>
             </Drawer>
             <Flex
             align="center"

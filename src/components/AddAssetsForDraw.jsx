@@ -1,14 +1,51 @@
 import { useState } from 'react'
-import {Flex, Select, Space, Typography, Divider, Form, Input, Button, Checkbox, InputNumber, DatePicker} from "antd";
+import {Flex, Select, Space, Typography, Divider, Form, Input, Button, Checkbox, InputNumber, DatePicker, Result} from "antd";
 import {useCryptoContext} from "../context/CryptoContext";
 
+const validateMessages = {
+  required: '${label} is required',
+  types: {
+      number: '${label} is not a valid number'
+  },
+  number: {
+      range: '${label} must be between ${min} and ${max}'
+  }
+};
 
-export default function AddAssetsForDraw( {} ) {
+export default function AddAssetsForDraw( {onClose} ) {
+    const [form] = Form.useForm();
+
     const [coin, setCoin] = useState(null);
     const [select, setSelect] = useState(false);
+    const [result, setResult] = useState(false);
 
 
     const {crypto} = useCryptoContext();
+
+    if (result){
+        return(
+            <Result
+                status="success"
+                title="Successfully Added new Asset"
+                subTitle={`Added ${42} of ${coin.name} by price ${24}`}
+                extra={[
+                    <Button type="primary" key="console" onClick={() => {
+                        onClose();
+                        setCoin(false);
+                        setResult(false);
+                    }}>
+                        Go Back
+                    </Button>,
+                    <Button key="buy" onClick={() => {
+                        setResult(false);
+                        setCoin(null);
+                    }}>
+                        Buy Again
+                    </Button>,
+                ]}
+            />
+        )
+    }
 
     if(!coin){
         return(
@@ -43,9 +80,23 @@ export default function AddAssetsForDraw( {} ) {
     }
 
     function onFinish(values) {
-        console.log(values)
+        setResult((prev) => !prev)
     }
 
+    function handleAmountChange(value){
+        const price = form.getFieldValue('price');
+        console.log(price);
+        form.setFieldsValue({
+            total: +(value * price).toFixed(2),
+        })
+    }
+    function handlePriceChange(value){
+        const amount = form.getFieldValue('amount');
+        console.log(amount);
+        form.setFieldsValue({
+            total: +(value * amount).toFixed(2),
+        })
+    }
     return(
         <>
             <Flex align="center">
@@ -70,6 +121,7 @@ export default function AddAssetsForDraw( {} ) {
             </Flex>
             <Divider/>
             <Form
+                form={form}
                 name="basic"
                 labelCol={{
                     span: 4,
@@ -81,9 +133,11 @@ export default function AddAssetsForDraw( {} ) {
                     maxWidth: 600,
                 }}
                 initialValues={{
-                    remember: true,
+                    price: + coin.price.toFixed(2),
                 }}
                 onFinish={onFinish}
+                validateMessages={validateMessages}
+                clearOnDestroy
             >
                 <Form.Item
                     label="Amount"
@@ -93,11 +147,13 @@ export default function AddAssetsForDraw( {} ) {
                             required: true,
                             type: 'number',
                             min: 0,
-                            message: 'Please input your username!',
                         },
                     ]}
                 >
-                    <InputNumber style={{
+                    <InputNumber
+                        onChange={handleAmountChange}
+                        placeholder='Enter coin amount'
+                        style={{
                         width: '100%'
                     }}/>
                 </Form.Item>
@@ -106,7 +162,9 @@ export default function AddAssetsForDraw( {} ) {
                     label="Price"
                     name="price"
                 >
-                    <InputNumber disabled style={{
+                    <InputNumber
+                        onChange={handlePriceChange}
+                        style={{
                         width: '100%'
                     }}/>
                 </Form.Item>
@@ -115,7 +173,11 @@ export default function AddAssetsForDraw( {} ) {
                     label="Date & Time"
                     name="date&time"
                 >
-                   <DatePicker showTime/>
+                   <DatePicker
+                       style={{
+                       width: '100%'
+                   }}
+                       showTime/>
                 </Form.Item>
 
                 <Form.Item

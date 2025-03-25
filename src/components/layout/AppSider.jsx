@@ -83,10 +83,8 @@ export default function AppSider() {
                 onCancel={() => setModal(false)}
                 footer={null}
             >
-
                 <CoinInfoModal coin={coin}/>
                 <Divider/>
-
             </Modal>
         </Layout.Sider>
     )
