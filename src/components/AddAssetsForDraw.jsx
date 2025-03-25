@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import {Flex, Select, Space, Typography, Divider, Form, Input, Button, Checkbox, InputNumber, DatePicker, Result} from "antd";
 import {useCryptoContext} from "../context/CryptoContext";
+import CoinImageDescription from "./CoinImageDescription";
 
 const validateMessages = {
   required: '${label} is required',
@@ -100,21 +101,7 @@ export default function AddAssetsForDraw( {onClose} ) {
     return(
         <>
             <Flex align="center">
-                <img
-                    src={coin.icon}
-                    alt={coin.name}
-                    title={coin.id}
-                    style={{
-                        width: 45,
-                        aspectRatio: 1,
-                    }}
-                />
-                <Typography.Title level={2} style={{
-                    margin: '0 1rem',
-                    padding: ''
-                }}>
-                    ( {coin.symbol} ) {coin.name}
-                </Typography.Title>
+                <CoinImageDescription coin={coin}/>{/*элемент иконка монеты + название*/}
                 <Button onClick={() => setCoin(null)}>
                     Return
                 </Button>

@@ -1,26 +1,13 @@
 import {Flex, Typography, Tag, Divider, QRCode, Card} from 'antd'
 import { RedditOutlined, TwitterOutlined} from '@ant-design/icons'
+import CoinImageDescription from "./CoinImageDescription";
 
 
 export default function CoinInfoModal({ coin }) {
     return(
         <>
             <Flex align="center">
-                <img
-                    src={coin.icon}
-                    alt={coin.name}
-                    title={coin.id}
-                    style={{
-                        width: 45,
-                        aspectRatio: 1,
-                    }}
-                />
-                <Typography.Title level={2} style={{
-                    margin: '0 1rem',
-                    padding: ''
-                }}>
-                    ( {coin.symbol} ) {coin.name}
-                </Typography.Title>
+                <CoinImageDescription coin={coin}/>{/*элемент иконка монеты + название*/}
             </Flex>
             <Divider />
             <Typography.Paragraph>
