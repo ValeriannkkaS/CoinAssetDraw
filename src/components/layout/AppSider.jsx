@@ -62,12 +62,13 @@ export default function AppSider() {
                                     )}
                                     {item.isPlain && (
                                             <>
-                                                {item.value.toFixed(2)}
+                                                {item.value.toFixed(3)}
                                             </>
                                     )}
                                     {!item.isPlain && (
                                         <Typography.Text type={asset.grow ? 'success' : 'danger'}>
-                                            {item.value.toFixed(2)}$
+                                            {console.log(item.value)}
+                                            {item.value.toFixed(3)}$
                                         </Typography.Text>
                                     )}
                                 </span>

@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useRef } from 'react'
 import {Flex, Select, Space, Typography, Divider, Form, Input, Button, Checkbox, InputNumber, DatePicker, Result} from "antd";
 import {useCryptoContext} from "../context/CryptoContext";
 import CoinImageDescription from "./CoinImageDescription";
@@ -15,20 +15,23 @@ const validateMessages = {
 
 export default function AddAssetsForDraw( {onClose} ) {
     const [form] = Form.useForm();
+    const assetRef = useRef();
 
     const [coin, setCoin] = useState(null);
     const [select, setSelect] = useState(false);
     const [result, setResult] = useState(false);
 
 
-    const {crypto} = useCryptoContext();
+
+
+    const {crypto, addNewAsset,} = useCryptoContext();
 
     if (result){
         return(
             <Result
                 status="success"
                 title="Successfully Added new Asset"
-                subTitle={`Added ${42} of ${coin.name} by price ${24}`}
+                subTitle={`Added ${assetRef.current.amount} of ${coin.name} by price ${assetRef.current.price}`}
                 extra={[
                     <Button type="primary" key="console" onClick={() => {
                         onClose();
@@ -80,18 +83,26 @@ export default function AddAssetsForDraw( {onClose} ) {
         )
     }
 
-    function onFinish(values) {
-        setResult((prev) => !prev)
+    function onFinish(values) {//отправка формы - добавление монет
+        const newAsset = {
+            id: coin.id,
+            amount: +values.amount,
+            price: values.price,
+            date: values.date?.$d ?? new Date()
+        };
+        assetRef.current = newAsset;
+        addNewAsset(newAsset, crypto);
+        setResult((prev) => !prev);
     }
 
-    function handleAmountChange(value){
+    function handleAmountChange(value){//изменение количчества монет
         const price = form.getFieldValue('price');
         console.log(price);
         form.setFieldsValue({
             total: +(value * price).toFixed(2),
         })
     }
-    function handlePriceChange(value){
+    function handlePriceChange(value){//изменение цены - нужно сделать динамическую подгрузку
         const amount = form.getFieldValue('amount');
         console.log(amount);
         form.setFieldsValue({
@@ -146,7 +157,7 @@ export default function AddAssetsForDraw( {onClose} ) {
                 </Form.Item>
 
                 <Form.Item
-                    label="Price"
+                    label="Price (current)"
                     name="price"
                 >
                     <InputNumber

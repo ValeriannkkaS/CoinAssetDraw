@@ -19,6 +19,17 @@ export function CryptoContextProvider({children}) {
     const [assets, setAssets] = useState([]);
     const [crypto, setCrypto] = useState([]);
 
+    function mapAsset(result, asset) {
+        const coin = result.find((c) => c.id === asset.id);
+        return {
+            grow: asset.price  <  coin.price, // boolean
+            growPercent: percentDiffCounter(asset.price, coin.price),
+            totalAmount: asset.amount * coin.price,
+            totalProfit: asset.amount * coin.price - asset.amount * asset.price,
+            ...asset,
+        }
+    }
+
     useEffect(() => {
         async function preload() {
             setLoading(true);
@@ -26,14 +37,7 @@ export function CryptoContextProvider({children}) {
             const {result} = await fakeFetchCrypto();
 
             setAssets(assets.map((asset) => {
-                const coin = result.find((c) => c.id === asset.id);
-                return {
-                    grow: asset.price  <  coin.price, // boolean
-                    growPercent: percentDiffCounter(asset.price, coin.price),
-                    totalAmount: asset.amount * coin.price,
-                    totalProfit: asset.amount * coin.price - asset.amount * asset.price,
-                    ...asset,
-                }
+               return mapAsset(result, asset);
             }));
             setCrypto(result);
 
@@ -42,11 +46,19 @@ export function CryptoContextProvider({children}) {
         preload()
     }, []);
 
+    function addNewAsset(newAsset, crypto) {//нужно оптимизировать, чтобы можно было добавить монету,
+        //которая уже есть в портфеле, и высчитывать окончательную прибыль, убыль(формула???)
+        //+ нужно сделать так, чтобы изменения сохранялись
+        console.log(crypto);
+        setAssets((prev) => [...prev, mapAsset(crypto, newAsset)])
+    }
+
     return(
         <CryptoContext.Provider value={{
             loading: loading,
             assets: assets,
             crypto: crypto,
+            addNewAsset: addNewAsset,
         }}>
             {children}
         </CryptoContext.Provider>
