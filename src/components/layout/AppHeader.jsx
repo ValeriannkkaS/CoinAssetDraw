@@ -103,7 +103,7 @@ export default function AppHeader() {
             </Modal>
             <Drawer
                 size="large"
-                title="Basic Drawer"
+                title="Add an asset at the current price, or specify the time"
                 onClose={() => setDrawer(false)}
                 open={drawer}
             >

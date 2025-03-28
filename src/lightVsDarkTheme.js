@@ -61,6 +61,38 @@ export const lightTheme = {
         border: "#D1D5DB",
         text: "#212529",
     },
+
+    table: {
+        headerBackground: "#E3EAFD",
+        headerText: "#222",
+        rowBackground: "#FFFFFF",
+        rowText: "#333",
+        border: "#DDD",
+    },
+
+    form: {
+        background: "#FFFFFF",
+        inputBackground: "#FFF",
+        inputText: "#333",
+        inputBorder: "#CCC",
+        inputDisabledBackground: "#F0F0F0",
+        inputDisabledText: "#DDD",
+        inputPlaceholder: "#999",
+    },
+
+    footer: {
+        background: "#FFFFFF",
+        text: "#333",
+        border: "#DDD",
+    },
+
+    qrCode: {
+        background: "#FFFFFF",
+        foreground: "#000000",
+        border: "#DDD",
+    },
+
+
 };
 
 export const darkTheme = {
@@ -81,7 +113,7 @@ export const darkTheme = {
     },
 
     content: {
-        background: "#8c8c8c",
+        background: "#202325",
         text: "#f5f5f5",
     },
 
@@ -126,6 +158,36 @@ export const darkTheme = {
         shadow: "rgba(255, 255, 255, 0.15)",
         border: "#3F464D",
         text: "#EAEAEA",
+    },
+
+    table: {
+        headerBackground: "#3A3F58",
+        headerText: "#FFF",
+        rowBackground: "#2B2B2B",
+        rowText: "#EEE",
+        border: "#555",
+    },
+
+    form: {
+        background: "#2B2B2B",
+        inputBackground: "#333",
+        inputText: "#EEE",
+        inputBorder: "#555",
+        inputDisabledBackground: "#444",
+        inputDisabledText: "#777",
+        inputPlaceholder: "#777",
+    },
+
+    footer: {
+        background: "#2B2B2B",
+        text: "#EEE",
+        border: "#555",
+    },
+
+    qrCode: {
+        background: "#2B2B2B",
+        foreground: "#FFFFFF",
+        border: "#555",
     },
 };
 

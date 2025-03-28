@@ -2,7 +2,7 @@ import {Layout} from 'antd'
 import {useThemeContext} from "../../context/ThemeContext";
 
 const footerStyle = {
-    textAlign: 'center',
+  height: 80
 };
 
 export default function AppFooter(){
@@ -11,10 +11,11 @@ export default function AppFooter(){
 
     return(
         <Layout.Footer style={{
-            color: '#fff',
-            backgroundColor: theme.header.background,
-            border: '1px solid' + `${theme.header.text}`,
+            backgroundColor: theme.footer.background,
+            border: '2px solid' + theme.footer.border,
             ...footerStyle
-        }}>Footer</Layout.Footer>
+        }}>
+
+        </Layout.Footer>
     )
 }

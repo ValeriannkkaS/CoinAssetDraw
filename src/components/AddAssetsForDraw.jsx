@@ -22,6 +22,7 @@ export default function AddAssetsForDraw( {onClose} ) {
     const [coin, setCoin] = useState(null);
     const [select, setSelect] = useState(false);
     const [result, setResult] = useState(false);
+    const [loadingPrice, setLoadingPrice] = useState(false);
 
 
 
@@ -113,26 +114,29 @@ export default function AddAssetsForDraw( {onClose} ) {
     }
     async function handleDateChange(value) {
         const amount = form.getFieldValue('amount');
-        console.log(value);
         const date = dateToString(value);
+        setLoadingPrice(true);
         const price = await getPriceByTime(date, coin.id);
-        console.log(price);
         form.setFieldsValue({
             price: price,
             total: price * amount,
-        })
-
+        });
+        setLoadingPrice(false);
     }
     return(
         <>
             <Flex align="center">
                 <CoinImageDescription coin={coin}/>{/*элемент иконка монеты + название*/}
-                <Button onClick={() => setCoin(null)}>
+                <Button
+                    size='large'
+                    onClick={() => setCoin(null)}
+                >
                     Return
                 </Button>
             </Flex>
             <Divider/>
             <Form
+                size='large'
                 form={form}
                 name="basic"
                 labelCol={{
@@ -171,11 +175,15 @@ export default function AddAssetsForDraw( {onClose} ) {
                 </Form.Item>
 
                 <Form.Item
-                    label="Price (current)"
+                    label="Price"
                     name="price"
+                    validateStatus={loadingPrice && 'validating'}
+                    hasFeedback
                 >
                     <InputNumber
+                        disabled
                         onChange={handlePriceChange}
+                        id='validating'
                         style={{
                         width: '100%'
                     }}/>

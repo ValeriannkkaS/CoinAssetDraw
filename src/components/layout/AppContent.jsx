@@ -24,7 +24,6 @@ export default function AppContent() {
     return(
         <Layout.Content style={{
             backgroundColor: theme.content.background,
-            color: theme.content.text,
             scrollbarColor: theme.sidebar.scrollbar,
             ...contentStyle
         }}>

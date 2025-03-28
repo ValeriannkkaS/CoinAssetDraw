@@ -1,9 +1,12 @@
 import {Flex, Typography, Tag, Divider, QRCode, Card} from 'antd'
 import { RedditOutlined, TwitterOutlined} from '@ant-design/icons'
 import CoinImageDescription from "./CoinImageDescription";
+import {useThemeContext} from "../context/ThemeContext";
 
 
 export default function CoinInfoModal({ coin }) {
+    const {theme} = useThemeContext();
+
     return(
         <>
             <Flex align="center">
@@ -82,6 +85,7 @@ export default function CoinInfoModal({ coin }) {
                 <Typography.Text strong>Website QR-Code: </Typography.Text>
                 <QRCode
                     errorLevel="H"
+                    color={theme.qrCode.foreground}
                     value={coin.websiteUrl}
                     icon={coin.icon}
                 />

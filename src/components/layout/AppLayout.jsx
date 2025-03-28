@@ -1,5 +1,5 @@
 import AppHeader from "./AppHeader";
-import {Layout, Spin} from "antd";
+import {Layout, Spin, Divider} from "antd";
 import AppSider from "./AppSider";
 import AppContent from "./AppContent";
 import {useCryptoContext} from "../../context/CryptoContext";
