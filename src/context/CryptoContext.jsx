@@ -1,7 +1,7 @@
 import {createContext, useEffect, useState, useContext} from 'react'
 import {cryptoAssets} from "../data";
 import {fakeFetchAssets, fakeFetchCrypto} from "../api";
-import {percentDiffCounter} from "../utils";
+import {calculateAveragePrice, percentDiffCounter} from "../utils";
 
 
 const CryptoContext = createContext({
@@ -18,6 +18,27 @@ export function CryptoContextProvider({children}) {
     const [loading, setLoading] = useState(true); // state загрузочного экрана
     const [assets, setAssets] = useState([]);
     const [crypto, setCrypto] = useState([]);
+    
+    function revertingAssets(result, assets) {
+
+        return assets.map((asset) => {
+            const coin = result.find( (coin) => coin.id === asset.id);
+            const currentPrice = asset.transactions.reduce((sum, current) => sum + coin.price * current.amount , 0);
+            const totalInvested = asset.transactions.reduce((sum, current) => sum + current.price * current.amount , 0);
+            const totalAmount = asset.transactions.reduce((sum, current) => sum + current.amount, 0);
+            return {
+                id: asset.id,
+                averagePrice: calculateAveragePrice(asset.transactions),
+                totalInvested: totalInvested,
+                totalAmount: totalAmount,
+                currentPrice: currentPrice,
+                grow: currentPrice > totalInvested,
+                growPercent: (currentPrice - totalInvested) * 100,
+                totalProfit: currentPrice - totalInvested,
+                ...asset
+            }
+        })
+    }
 
     function mapAsset(result, asset) {
         const coin = result.find((c) => c.id === asset.id);
@@ -36,9 +57,7 @@ export function CryptoContextProvider({children}) {
             const assets = await fakeFetchAssets();
             const {result} = await fakeFetchCrypto();
 
-            setAssets(assets.map((asset) => {
-               return mapAsset(result, asset);
-            }));
+            setAssets(revertingAssets(result, assets));
             setCrypto(result);
 
             setLoading(false);

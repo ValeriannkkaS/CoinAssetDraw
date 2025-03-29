@@ -17,6 +17,7 @@ export const cryptoData = {
         "priceChange1d": 0.28,
         "priceChange1w": 5.68,
         "redditUrl": "https://www.reddit.com/r/Bitcoin/",
+        "websiteUrl": "https://www.bitcoin.com/",
         "twitterUrl": "https://twitter.com/bitcoin",
         "explorers": [
             "https://mempool.space/",
@@ -627,17 +628,39 @@ export const cryptoData = {
 export const cryptoAssets = [
     {
         id: 'bitcoin',
-        amount: 0.02,
-        price: 26244,
-        date: new Date(),
+        transactions: [
+            {
+                amount: 0.06,
+                price: 84547,
+                date: '20-03-2025',
+            },
+            {
+                amount: 0.04,
+                price: 90431,
+                date: '05-03-2025',
+            },
+        ],
     },
     {
         id: 'ethereum',
-        amount: 0.4,
-        price: 2400,
-        date: new Date(),
+        transactions: [
+            {
+                amount: 0.1,
+                price: 1846,
+                date: '13-03-2025',
+            },
+            {
+                amount: 0.06,
+                price: 2033,
+                date: '19-03-2025',
+            },
+        ],
     },
-    {
+
+]
+
+/*предыдущий формат данных
+{
         id: 'tron',
         amount: 1229.2,
         price: 0.092,
@@ -655,4 +678,4 @@ export const cryptoAssets = [
         price: 0.4,
         date: new Date,
     },
-]
+    */

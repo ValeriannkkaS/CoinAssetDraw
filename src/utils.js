@@ -14,3 +14,10 @@ export function dateToString(value) {
     const str = `${day.padStart(2, '0')}-${month.padStart(2, '0')}-${year}`;
     return str;
 }
+
+export function calculateAveragePrice(transactions){//array
+    const totalCost = transactions.reduce((sum, current) => sum + current.price * current.amount , 0);
+    const totalAmount = transactions.reduce((sum, current) => sum + current.amount, 0);
+
+    return (totalCost / totalAmount);//number
+}//функция для вычисления средней цены покупки на основании массива транзакций по одной монете

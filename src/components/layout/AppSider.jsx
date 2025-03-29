@@ -51,7 +51,7 @@ export default function AppSider() {
                         size='small'
                         dataSource={[
                             {title: 'Total Profit', value: asset.totalProfit, withTag: true},
-                            {title: 'Asset Amount', value: asset.amount, isPlain: true},
+                            {title: 'Asset Amount', value: asset.totalAmount, isPlain: true},
                         ]}
                         renderItem={(item) => (
                             <List.Item>
