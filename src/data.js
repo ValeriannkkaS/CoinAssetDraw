@@ -630,12 +630,12 @@ export const cryptoAssets = [
         id: 'bitcoin',
         transactions: [
             {
-                amount: 0.06,
+                amount: 0.0636,
                 price: 84547,
                 date: '20-03-2025',
             },
             {
-                amount: 0.04,
+                amount: 0.0453,
                 price: 90431,
                 date: '05-03-2025',
             },

@@ -33,7 +33,7 @@ export function CryptoContextProvider({children}) {
                 totalAmount: totalAmount,
                 currentPrice: currentPrice,
                 grow: currentPrice > totalInvested,
-                growPercent: (currentPrice - totalInvested) * 100,
+                growPercent: (currentPrice - totalInvested) / totalInvested * 100,
                 totalProfit: currentPrice - totalInvested,
                 ...asset
             }

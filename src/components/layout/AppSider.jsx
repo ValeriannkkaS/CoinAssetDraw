@@ -39,7 +39,7 @@ export default function AppSider() {
                 >
                     <Statistic
                         title={capitalize(asset.id)}
-                        value={asset.totalAmount}
+                        value={asset.totalInvested}
                         precision={3}
                         valueStyle={{
                             color: (asset.grow) ? theme.cards.positiveText : theme.cards.negativeText,
@@ -58,11 +58,11 @@ export default function AppSider() {
                                 <span>{item.title}</span>
                                 <span>
                                     {item.withTag && (
-                                        <Tag color={asset.grow ? 'green' : 'red'}>{asset.growPercent}%</Tag>
+                                        <Tag color={asset.grow ? 'green' : 'red'}>{asset.growPercent.toFixed(2)}%</Tag>
                                     )}
                                     {item.isPlain && (
                                             <>
-                                                {item.value.toFixed(3)}
+                                                {item.value}
                                             </>
                                     )}
                                     {!item.isPlain && (
