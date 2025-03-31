@@ -1,7 +1,8 @@
-import {Flex, Typography, Tag, Divider, QRCode, Card} from 'antd'
+import {Flex, Typography, Tag, Divider, QRCode} from 'antd'
 import { RedditOutlined, TwitterOutlined} from '@ant-design/icons'
 import CoinImageDescription from "./CoinImageDescription";
 import {useThemeContext} from "../context/ThemeContext";
+import CoinTrendInformation from './CoinTrendInformation'
 
 
 export default function CoinInfoModal({ coin }) {
@@ -9,24 +10,9 @@ export default function CoinInfoModal({ coin }) {
 
     return(
         <>
-            <Flex align="center">
-                <CoinImageDescription coin={coin}/>{/*элемент иконка монеты + название*/}
-            </Flex>
+            <CoinImageDescription coin={coin}/>{/*элемент иконка монеты + название*/}
             <Divider />
-            <Typography.Paragraph>
-                <Typography.Text strong>1 hour:</Typography.Text>
-                <Tag color={coin.priceChange1h > 0 ? 'green' : 'red'}>
-                    {coin.priceChange1h}%
-                </Tag>
-                <Typography.Text strong>1 day:</Typography.Text>
-                <Tag color={coin.priceChange1d > 0 ? 'green' : 'red'}>
-                    {coin.priceChange1d}%
-                </Tag>
-                <Typography.Text strong>1 week:</Typography.Text>
-                <Tag color={coin.priceChange1w > 0 ? 'green' : 'red'}>
-                    {coin.priceChange1w}%
-                </Tag>
-            </Typography.Paragraph>
+            <CoinTrendInformation coin={coin}/>
             <Typography.Paragraph>
                 <Typography.Text strong>Price: </Typography.Text>
                 {coin.price.toFixed(2)}$
