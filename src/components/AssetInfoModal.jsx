@@ -1,68 +1,10 @@
 import CoinImageDescription from './CoinImageDescription';
-import { Divider, Flex, Typography, Table, Tag } from 'antd';
+import { Divider, Typography } from 'antd';
 import CoinTrendInformation from './CoinTrendInformation';
 import PropTypes from 'prop-types';
-import { useCryptoContext } from '../context/CryptoContext.jsx';
-import { useState } from 'react';
 import AssetInfoTableForModal from './AssetInfoTableForModal.jsx';
 
 export default function AssetInfoModal({ coin }) {
-    const columns = [
-        {
-            title: 'Date',
-            width: 150,
-            dataIndex: 'date',
-            key: 'date',
-            fixed: 'left',
-        },
-        {
-            title: 'Amount',
-            width: 150,
-            dataIndex: 'amount',
-            key: 'amount',
-        },
-        {
-            title: 'Purchase Price',
-            dataIndex: 'price',
-            key: '1',
-            width: 150,
-            render: (price) => price + ' $',
-        },
-        {
-            title: 'Total Invested',
-            dataIndex: 'totalInvested',
-            key: '2',
-            width: 150,
-            render: (totalInvested) => totalInvested.toFixed(2) + ' $',
-        },
-        {
-            title: 'Total Profit',
-            dataIndex: 'totalProfit',
-            key: '3',
-            width: 150,
-            render: (profit, key) => (
-                <Typography.Text
-                    key={key}
-                    type={profit >= 0 ? 'success' : 'danger'}
-                >
-                    {profit.toFixed(2) + ' $'}
-                </Typography.Text>
-            ),
-        },
-        {
-            title: 'Profit (%)',
-            dataIndex: 'growPercent',
-            key: '4',
-            width: 100,
-            fixed: 'right',
-            render: (profit, key) => (
-                <Tag key={key} color={profit >= 0 ? 'green' : 'red'}>
-                    {profit + ' %'}
-                </Tag>
-            ),
-        },
-    ];
-
     return (
         <>
             <CoinImageDescription coin={coin} />
