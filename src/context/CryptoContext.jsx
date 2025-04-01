@@ -33,6 +33,22 @@ export function CryptoContextProvider({ children }) {
                 (sum, current) => sum + current.amount,
                 0,
             );
+            const transactionsDetails = asset.transactions.map(
+                (transaction, index) => {
+                    return {
+                        id: index,
+                        growPercent: percentDiffCounter(
+                            transaction.price,
+                            coin.price,
+                        ),
+                        totalInvested: transaction.price * transaction.amount,
+                        totalProfit:
+                            coin.price * transaction.amount -
+                            transaction.price * transaction.amount,
+                        ...transaction,
+                    };
+                },
+            );
             return {
                 id: asset.id,
                 averagePrice: calculateAveragePrice(asset.transactions),
@@ -43,6 +59,7 @@ export function CryptoContextProvider({ children }) {
                 growPercent:
                     ((currentPrice - totalInvested) / totalInvested) * 100,
                 totalProfit: currentPrice - totalInvested,
+                transactionsDetails: transactionsDetails,
                 ...asset,
             };
         });

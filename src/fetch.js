@@ -1,5 +1,6 @@
 export async function getPriceByTime(date, coin) {
     const options = {
+        //временное решение (дает только на дату, не на время)
         method: 'GET',
         headers: {
             accept: 'application/json',
@@ -16,4 +17,19 @@ export async function getPriceByTime(date, coin) {
     } catch (e) {
         throw e;
     }
+}
+async function getChartsdata(coin, period) {
+    const options = {
+        //приблизительная функция для запросов
+        method: 'GET',
+        headers: {
+            'X-API-KEY': 'LofoS1PFtXimDDDNvfCdMSh9OoJWY83QWMbIcgfLrFI=',
+        },
+    };
+    const response = await fetch(
+        `https://openapiv1.coinstats.app/coins/${coin}/charts?period=${period}`,
+        options,
+    );
+    const json = await response.json();
+    return json;
 }
