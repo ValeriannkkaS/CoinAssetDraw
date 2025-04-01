@@ -1,5 +1,8 @@
 export function percentDiffCounter(priceInitial, priceNow) {
-    return +(100 * Math.abs((priceInitial - priceNow) / ((priceInitial + priceNow) / 2) )).toFixed(2)
+    return +(
+        100 *
+        Math.abs((priceInitial - priceNow) / ((priceInitial + priceNow) / 2))
+    ).toFixed(2);
 }
 
 export function capitalize(str) {
@@ -15,9 +18,16 @@ export function dateToString(value) {
     return str;
 }
 
-export function calculateAveragePrice(transactions){//array
-    const totalCost = transactions.reduce((sum, current) => sum + current.price * current.amount , 0);
-    const totalAmount = transactions.reduce((sum, current) => sum + current.amount, 0);
+export function calculateAveragePrice(transactions) {
+    //array
+    const totalCost = transactions.reduce(
+        (sum, current) => sum + current.price * current.amount,
+        0,
+    );
+    const totalAmount = transactions.reduce(
+        (sum, current) => sum + current.amount,
+        0,
+    );
 
-    return (totalCost / totalAmount);//number
-}//функция для вычисления средней цены покупки на основании массива транзакций по одной монете
+    return totalCost / totalAmount; //number
+} //функция для вычисления средней цены покупки на основании массива транзакций по одной монете

@@ -1,11 +1,9 @@
-import {Table} from 'antd'
-import {useCryptoContext} from "../context/CryptoContext";
-import {capitalize} from "../utils";
-
+import { Table } from 'antd';
+import { useCryptoContext } from '../context/CryptoContext';
+import { capitalize } from '../utils';
 
 export default function AssetsTable() {
-
-    const {assets} = useCryptoContext();
+    const { assets } = useCryptoContext();
 
     const columns = [
         {
@@ -39,31 +37,31 @@ export default function AssetsTable() {
         },
     ];
     const data = assets.map((asset) => {
-        return{
+        return {
             key: asset.id,
             name: capitalize(asset.id),
             price: asset.price,
             amount: asset.amount,
             total: asset.totalAmount,
-        }
+        };
     });
 
-    return(
-        <div style={{
-            marginBottom: '1rem'
-        }}>
-        <Table
-            margin='1rem'
+    return (
+        <div
             style={{
-                maxHeight: '20px'
-
+                marginBottom: '1rem',
             }}
-            pagination={false}
-            columns={columns}
-            dataSource={data}
-            showSorterTooltip={{ target: 'sorter-icon' }}
-        />
+        >
+            <Table
+                margin="1rem"
+                style={{
+                    maxHeight: '20px',
+                }}
+                pagination={false}
+                columns={columns}
+                dataSource={data}
+                showSorterTooltip={{ target: 'sorter-icon' }}
+            />
         </div>
-    )
-
+    );
 }

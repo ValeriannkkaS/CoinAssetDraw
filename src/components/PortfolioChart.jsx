@@ -1,22 +1,19 @@
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import { Pie } from 'react-chartjs-2';
-import {useCryptoContext} from "../context/CryptoContext";
-import {capitalize} from "../utils";
+import { useCryptoContext } from '../context/CryptoContext';
+import { capitalize } from '../utils';
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
-
-
 export default function PortfolioChart() {
-    const {assets} = useCryptoContext();
-
+    const { assets } = useCryptoContext();
 
     const data = {
         labels: assets.map((asset) => capitalize(asset.id)),
         datasets: [
             {
                 label: 'Total amount ($)',
-                data: assets.map( (asset) => asset.totalAmount),
+                data: assets.map((asset) => asset.totalAmount),
                 backgroundColor: [
                     'rgba(255, 99, 132, 0.8)',
                     'rgba(54, 162, 235, 0.8)',
@@ -38,14 +35,16 @@ export default function PortfolioChart() {
         ],
     };
 
-    return(
-        <div style={{
-            display: 'flex',
-            marginBottom: '1rem',
-            justifyContent: 'center',
-            height: '50vh'
-        }}>
+    return (
+        <div
+            style={{
+                display: 'flex',
+                marginBottom: '1rem',
+                justifyContent: 'center',
+                height: '50vh',
+            }}
+        >
             <Pie data={data} />
         </div>
-    )
+    );
 }
