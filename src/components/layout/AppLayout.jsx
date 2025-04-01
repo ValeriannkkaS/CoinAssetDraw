@@ -1,25 +1,24 @@
-import AppHeader from "./AppHeader";
-import {Layout, Spin, Divider} from "antd";
-import AppSider from "./AppSider";
-import AppContent from "./AppContent";
-import {useCryptoContext} from "../../context/CryptoContext";
-import AppFooter from "./AppFooter";
+import AppHeader from './AppHeader';
+import { Layout, Spin } from 'antd';
+import AppSider from './AppSider';
+import AppContent from './AppContent';
+import { useCryptoContext } from '../../context/CryptoContext';
+import AppFooter from './AppFooter';
 
 export default function AppLayout() {
-    const {loading} = useCryptoContext();
-    if (loading) { //Спин во время загрузки
-        return(
-            <Spin spinning={loading} fullscreen/>
-        )
+    const { loading } = useCryptoContext();
+    if (loading) {
+        //Спин во время загрузки
+        return <Spin spinning={loading} fullscreen />;
     }
-    return(
+    return (
         <Layout>
-            <AppHeader/>
+            <AppHeader />
             <Layout>
-                <AppSider/>
-                <AppContent/>
+                <AppSider />
+                <AppContent />
             </Layout>
-            <AppFooter/>
+            <AppFooter />
         </Layout>
-    )
+    );
 }

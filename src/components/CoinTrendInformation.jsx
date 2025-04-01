@@ -1,7 +1,8 @@
-import {Tag, Typography} from "antd";
+import { Tag, Typography } from 'antd';
+import PropTypes from 'prop-types';
 
-export default function CoinTrendInformation({coin}) {
-    return(
+export default function CoinTrendInformation({ coin }) {
+    return (
         <Typography.Paragraph>
             <Typography.Text strong>1 hour:</Typography.Text>
             <Tag color={coin.priceChange1h > 0 ? 'green' : 'red'}>
@@ -16,5 +17,8 @@ export default function CoinTrendInformation({coin}) {
                 {coin.priceChange1w}%
             </Tag>
         </Typography.Paragraph>
-    )
+    );
 }
+CoinTrendInformation.propTypes = {
+    coin: PropTypes.object.isRequired,
+};

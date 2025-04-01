@@ -1,18 +1,19 @@
-import {Flex, Typography, Tag, Divider, QRCode} from 'antd'
-import { RedditOutlined, TwitterOutlined} from '@ant-design/icons'
-import CoinImageDescription from "./CoinImageDescription";
-import {useThemeContext} from "../context/ThemeContext";
-import CoinTrendInformation from './CoinTrendInformation'
-
+import { Flex, Typography, Tag, Divider, QRCode } from 'antd';
+import { RedditOutlined, TwitterOutlined } from '@ant-design/icons';
+import CoinImageDescription from './CoinImageDescription';
+import { useThemeContext } from '../context/ThemeContext';
+import CoinTrendInformation from './CoinTrendInformation';
+import PropTypes from 'prop-types';
 
 export default function CoinInfoModal({ coin }) {
-    const {theme} = useThemeContext();
+    const { theme } = useThemeContext();
 
-    return(
+    return (
         <>
-            <CoinImageDescription coin={coin}/>{/*элемент иконка монеты + название*/}
+            <CoinImageDescription coin={coin} />
+            {/*элемент иконка монеты + название*/}
             <Divider />
-            <CoinTrendInformation coin={coin}/>
+            <CoinTrendInformation coin={coin} />
             <Typography.Paragraph>
                 <Typography.Text strong>Price: </Typography.Text>
                 {coin.price.toFixed(2)}$
@@ -29,40 +30,49 @@ export default function CoinInfoModal({ coin }) {
                 <Typography.Text strong>Contract address: </Typography.Text>
                 {coin.contractAddress ? coin.contractAddress : 'none'}
             </Typography.Paragraph>
-            <Divider/>
+            <Divider />
 
             <Flex
-                align='center'
-                gap='1rem'
+                align="center"
+                gap="1rem"
                 style={{
-                flexDirection: 'column',
-            }}>
-                <Typography.Paragraph
-                style={{
-                    margin: 0
+                    flexDirection: 'column',
                 }}
+            >
+                <Typography.Paragraph
+                    style={{
+                        margin: 0,
+                    }}
                 >
                     <Typography.Text strong>Social Network:</Typography.Text>
                 </Typography.Paragraph>
-                <div style={{
-                    border: '1px solid #8c8c8c',
-                    padding: '0.5rem',
-                    borderRadius: '0.5rem',
-                }}>
+                <div
+                    style={{
+                        border: '1px solid #8c8c8c',
+                        padding: '0.5rem',
+                        borderRadius: '0.5rem',
+                    }}
+                >
                     <Tag icon={<TwitterOutlined />} color="#55acee">
                         <a
                             href={coin.twitterUrl}
                             target="_blank"
+                            rel="noreferrer"
                         >
                             Twitter
                         </a>
                     </Tag>
-                    <Tag icon={<RedditOutlined />} color="#FF4500" style={{
-                        margin: '0'
-                    }}>
+                    <Tag
+                        icon={<RedditOutlined />}
+                        color="#FF4500"
+                        style={{
+                            margin: '0',
+                        }}
+                    >
                         <a
                             href={coin.redditUrl}
                             target="_blank"
+                            rel="noreferrer"
                         >
                             Reddit
                         </a>
@@ -81,5 +91,17 @@ export default function CoinInfoModal({ coin }) {
                 </Typography.Paragraph>
             </Flex>
         </>
-    )
+    );
 }
+CoinInfoModal.propTypes = {
+    coin: PropTypes.shape({
+        price: PropTypes.number.isRequired,
+        icon: PropTypes.string,
+        websiteUrl: PropTypes.string,
+        redditUrl: PropTypes.string,
+        twitterUrl: PropTypes.string,
+        contractAddress: PropTypes.string,
+        priceBtc: PropTypes.number,
+        marketCap: PropTypes.number,
+    }),
+};

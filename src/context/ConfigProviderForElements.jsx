@@ -1,10 +1,11 @@
-import {ConfigProvider} from 'antd'
-import {useThemeContext} from "./ThemeContext";
+import { ConfigProvider } from 'antd';
+import { useThemeContext } from './ThemeContext';
+import { PropTypes } from 'prop-types';
 
-export default function ConfigProviderForElements( { children } ) {
-    const {theme} = useThemeContext();
+export default function ConfigProviderForElements({ children }) {
+    const { theme } = useThemeContext();
 
-    return(
+    return (
         <ConfigProvider
             theme={{
                 components: {
@@ -64,21 +65,24 @@ export default function ConfigProviderForElements( { children } ) {
                     },
                     InputNumber: {
                         colorBgContainer: theme.form.background,
-                        colorBgContainerDisabled: theme.form.inputDisabledBackground,
+                        colorBgContainerDisabled:
+                            theme.form.inputDisabledBackground,
                         colorTextPlaceholder: theme.form.inputPlaceholder,
                         colorText: theme.form.inputText,
-                        colorTextDisabled: theme.form.inputDisabledText ,
+                        colorTextDisabled: theme.form.inputDisabledText,
                     },
-                    DatePicker:{
+                    DatePicker: {
                         colorBgContainer: theme.form.background,
                         colorTextPlaceholder: theme.form.inputPlaceholder,
                         colorText: theme.form.inputText,
-                    }
-
+                    },
                 },
             }}
         >
             {children}
         </ConfigProvider>
-    )
+    );
 }
+ConfigProviderForElements.propTypes = {
+    children: PropTypes.node,
+};
