@@ -125,6 +125,7 @@ export default function AppSider() {
                 onOk={() => setModal(false)}
                 onCancel={() => setModal(false)}
                 footer={null}
+                width="60%"
             >
                 <AssetInfoModal coin={coin} />
             </Modal>

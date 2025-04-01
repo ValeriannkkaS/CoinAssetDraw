@@ -639,6 +639,56 @@ export const cryptoAssets = [
                 price: 90431,
                 date: '05-03-2025',
             },
+            {
+                amount: 0.0636,
+                price: 86547,
+                date: '20-03-2025',
+            },
+            {
+                amount: 0.0453,
+                price: 91431,
+                date: '05-03-2025',
+            },
+            {
+                amount: 0.0636,
+                price: 83547,
+                date: '20-03-2025',
+            },
+            {
+                amount: 0.0453,
+                price: 89431,
+                date: '05-03-2025',
+            },
+            {
+                amount: 0.0636,
+                price: 85547,
+                date: '20-03-2025',
+            },
+            {
+                amount: 0.0453,
+                price: 92431,
+                date: '05-03-2025',
+            },
+            {
+                amount: 0.0453,
+                price: 91431,
+                date: '05-03-2025',
+            },
+            {
+                amount: 0.0636,
+                price: 83547,
+                date: '20-03-2025',
+            },
+            {
+                amount: 0.0453,
+                price: 91431,
+                date: '05-03-2025',
+            },
+            {
+                amount: 0.0636,
+                price: 83547,
+                date: '20-03-2025',
+            },
         ],
     },
     {
@@ -696,23 +746,3 @@ export const chartData = [
     [1743497700, 84126.9946, 1, 44.6894],
     [1743523159, 85222.73834987082, 1, 44.34193643359814],
 ];
-/*предыдущий формат данных
-{
-        id: 'tron',
-        amount: 1229.2,
-        price: 0.092,
-        date: new Date(),
-    },
-    {
-        id: 'shiba-inu',
-        amount: 100000013.5,
-        price: 0.000008,
-        date: new Date,
-    },
-    {
-        id: 'tether',
-        amount: 2346,
-        price: 0.4,
-        date: new Date,
-    },
-    */

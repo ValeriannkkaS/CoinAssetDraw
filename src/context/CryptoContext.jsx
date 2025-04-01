@@ -36,7 +36,7 @@ export function CryptoContextProvider({ children }) {
             const transactionsDetails = asset.transactions.map(
                 (transaction, index) => {
                     return {
-                        id: index,
+                        key: index,
                         growPercent: percentDiffCounter(
                             transaction.price,
                             coin.price,
