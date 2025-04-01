@@ -1,12 +1,15 @@
-import CoinImageDescription from './CoinImageDescription';
-import { Divider, Flex, Typography, Table, Tag } from 'antd';
-import CoinTrendInformation from './CoinTrendInformation';
-import PropTypes from 'prop-types';
-import { useCryptoContext } from '../context/CryptoContext.jsx';
+import { Table, Tag, Typography } from 'antd';
 import { useState } from 'react';
-import AssetInfoTableForModal from './AssetInfoTableForModal.jsx';
+import { useCryptoContext } from '../context/CryptoContext.jsx';
+import { PropTypes } from 'prop-types';
 
-export default function AssetInfoModal({ coin }) {
+export default function AssetInfoTableForModal({ coin }) {
+    const [pageSize, setPageSize] = useState('5');
+
+    const { assets } = useCryptoContext();
+    const currentAsset = assets.find((asset) => asset.id === coin.id);
+    const dataSource = currentAsset.transactionsDetails;
+
     const columns = [
         {
             title: 'Date',
@@ -64,22 +67,23 @@ export default function AssetInfoModal({ coin }) {
     ];
 
     return (
-        <>
-            <CoinImageDescription coin={coin} />
-            <Divider />
-            <CoinTrendInformation coin={coin} />
-            <Typography.Paragraph>
-                <Typography.Text strong>Current price: </Typography.Text>
-                {coin.price.toFixed(2)}$
-            </Typography.Paragraph>
-            <Divider />
-            <AssetInfoTableForModal coin={coin} />
-        </>
+        <Table
+            columns={columns}
+            dataSource={dataSource}
+            scroll={{ x: 700 }}
+            pagination={{
+                position: ['none', 'bottomCenter'],
+                pageSize,
+                showSizeChanger: true,
+                pageSizeOptions: ['5', '10', '15'],
+                onShowSizeChange: (_, size) => setPageSize(size),
+            }}
+            size={'small'}
+        />
     );
 }
-AssetInfoModal.propTypes = {
+AssetInfoTableForModal.propTypes = {
     coin: PropTypes.shape({
-        price: PropTypes.number.isRequired,
         id: PropTypes.string.isRequired,
     }),
 };
