@@ -1,8 +1,9 @@
 import CoinImageDescription from './CoinImageDescription';
-import { Divider, Typography } from 'antd';
+import { Divider, Tabs, Typography } from 'antd';
 import CoinTrendInformation from './CoinTrendInformation';
 import PropTypes from 'prop-types';
 import AssetInfoTableForModal from './AssetInfoTableForModal.jsx';
+import ChartForModal from './ChartForModal.jsx';
 
 export default function AssetInfoModal({ coin }) {
     return (
@@ -15,7 +16,22 @@ export default function AssetInfoModal({ coin }) {
                 {coin.price.toFixed(2)}$
             </Typography.Paragraph>
             <Divider />
-            <AssetInfoTableForModal coin={coin} />
+            <Tabs
+                defaultActiveKey="1"
+                items={[
+                    {
+                        key: '1',
+                        label: 'Information about your transaction',
+                        children: <AssetInfoTableForModal coin={coin} />,
+                    },
+                    {
+                        key: '2',
+                        label: 'Dynamic chart of price',
+                        children: <ChartForModal coin={coin} />,
+                    },
+                ]}
+                onSelect={''}
+            />
         </>
     );
 }

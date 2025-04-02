@@ -1,4 +1,4 @@
-import { Table, Tag, Typography } from 'antd';
+import { Table, Tag, Typography, Flex } from 'antd';
 import { useState } from 'react';
 import { useCryptoContext } from '../context/CryptoContext.jsx';
 import { PropTypes } from 'prop-types';
@@ -67,19 +67,26 @@ export default function AssetInfoTableForModal({ coin }) {
     ];
 
     return (
-        <Table
-            columns={columns}
-            dataSource={dataSource}
-            scroll={{ x: 700 }}
-            pagination={{
-                position: ['none', 'bottomCenter'],
-                pageSize,
-                showSizeChanger: true,
-                pageSizeOptions: ['5', '10', '15'],
-                onShowSizeChange: (_, size) => setPageSize(size),
-            }}
-            size={'small'}
-        />
+        <>
+            <Flex justify={'center'}>
+                <Typography.Title level={2}>
+                    Your purchases of {coin.id}:
+                </Typography.Title>
+            </Flex>
+            <Table
+                columns={columns}
+                dataSource={dataSource}
+                scroll={{ x: 700 }}
+                pagination={{
+                    position: ['none', 'bottomCenter'],
+                    pageSize,
+                    showSizeChanger: true,
+                    pageSizeOptions: ['5', '10', '15'],
+                    onShowSizeChange: (_, size) => setPageSize(size),
+                }}
+                size={'small'}
+            />
+        </>
     );
 }
 AssetInfoTableForModal.propTypes = {
