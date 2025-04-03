@@ -1,16 +1,16 @@
+const optionsForFetchPriceByTime = {
+    //временное решение (дает только на дату, не на время)
+    method: 'GET',
+    headers: {
+        accept: 'application/json',
+        'x-cg-api-key': 'CG-fFYANEwdjEAEojrzbuRqd7jJ',
+    },
+};
 export async function getPriceByTime(date, coin) {
-    const options = {
-        //временное решение (дает только на дату, не на время)
-        method: 'GET',
-        headers: {
-            accept: 'application/json',
-            'x-cg-api-key': 'CG-fFYANEwdjEAEojrzbuRqd7jJ',
-        },
-    };
     try {
         const response = await fetch(
             `https://api.coingecko.com/api/v3/coins/${coin}/history?vs_currency=usd&date=${date}&localization=false`,
-            options,
+            optionsForFetchPriceByTime,
         );
         const json = await response.json();
         return json.market_data.current_price.usd.toFixed(2);
@@ -18,18 +18,23 @@ export async function getPriceByTime(date, coin) {
         throw e;
     }
 }
-async function getChartsdata(coin, period) {
-    const options = {
-        //приблизительная функция для запросов
-        method: 'GET',
-        headers: {
-            'X-API-KEY': 'LofoS1PFtXimDDDNvfCdMSh9OoJWY83QWMbIcgfLrFI=',
-        },
-    };
-    const response = await fetch(
-        `https://openapiv1.coinstats.app/coins/${coin}/charts?period=${period}`,
-        options,
-    );
-    const json = await response.json();
-    return json;
-}
+const optionsForFetchChartData = {
+    //приблизительная функция для запросов
+    method: 'GET',
+    headers: {
+        'X-API-KEY': 'LofoS1PFtXimDDDNvfCdMSh9OoJWY83QWMbIcgfLrFI=',
+    },
+};
+export const fetchChartsData = async (coin, period) => {
+    try {
+        const response = await fetch(
+            `https://openapiv1.coinstats.app/coins/${coin}/charts?period=${period}`,
+            optionsForFetchChartData,
+        );
+        if (!response.ok) throw new Error('Coins not found');
+        return await response.json();
+    } catch (error) {
+        console.log(error);
+        throw error;
+    }
+};

@@ -6,7 +6,7 @@ import { PropTypes } from 'prop-types';
 const CryptoContext = createContext({
     assets: [],
     crypto: [],
-    loading: false,
+    loading: true,
 });
 
 export const useCryptoContext = () => {
@@ -38,8 +38,8 @@ export function CryptoContextProvider({ children }) {
                     return {
                         key: index,
                         growPercent: percentDiffCounter(
-                            transaction.price,
                             coin.price,
+                            transaction.price,
                         ),
                         totalInvested: transaction.price * transaction.amount,
                         totalProfit:
