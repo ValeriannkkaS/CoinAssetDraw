@@ -706,6 +706,21 @@ export const cryptoAssets = [
             },
         ],
     },
+    {
+        id: 'solana',
+        transactions: [
+            {
+                amount: 0.1,
+                price: 1846,
+                date: '13-03-2025',
+            },
+            {
+                amount: 0.06,
+                price: 2033,
+                date: '19-03-2025',
+            },
+        ],
+    },
 ];
 export const chartData = [
     [

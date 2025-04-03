@@ -1,8 +1,9 @@
 import { createContext, useContext, useEffect, useState } from 'react';
 import { fetchChartsData } from '../fetch.js';
+import { PropTypes } from 'prop-types';
 
 const ChartDataContext = createContext({
-    data: [],
+    chartData: [],
     loading: true,
 });
 
@@ -11,9 +12,10 @@ export const useChartDataContext = () => {
 };
 export default function ChartDataContextProvider({ children }) {
     const [chartData, setChartData] = useState(null);
-    const [period, setPeriod] = useState('24h');
-    const [coin, setCoin] = useState(null);
+    const [period, setPeriod] = useState('all');
+    const [coin, setCoin] = useState('bitcoin');
     const [error, setError] = useState(null);
+    const [grow, setGrow] = useState(true);
 
     const [loading, setLoading] = useState(true);
 
@@ -21,17 +23,18 @@ export default function ChartDataContextProvider({ children }) {
         const fetchData = async () => {
             setLoading(true);
             try {
-                //const data = await fetchChartsData(coin, period);
-                const data = 1;
+                const data = await fetchChartsData(coin, period);
                 setChartData(data);
+                setGrow(data[0][1] < data.at(-1)[1]);
             } catch (error) {
                 setError(error.message);
+                console.error(error);
             } finally {
-                setTimeout(() => setLoading(false), 2000);
+                setLoading(false);
             }
         };
         fetchData();
-    }, [period]);
+    }, [period, coin]);
 
     const changePeriod = (period) => {
         setPeriod(period);
@@ -49,6 +52,8 @@ export default function ChartDataContextProvider({ children }) {
                 chartData: chartData,
                 loading: loading,
                 error: error,
+                coin: coin,
+                grow: grow,
                 changePeriod: changePeriod,
                 changeCoin: changeCoin,
                 changeError: changeError,
@@ -58,3 +63,6 @@ export default function ChartDataContextProvider({ children }) {
         </ChartDataContext.Provider>
     );
 }
+ChartDataContextProvider.propTypes = {
+    children: PropTypes.node.isRequired,
+};

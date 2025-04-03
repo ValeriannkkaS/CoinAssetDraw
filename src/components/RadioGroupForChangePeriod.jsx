@@ -20,7 +20,7 @@ export default function RadioGroupForChangePeriod() {
             <Radio.Group
                 block
                 options={optionsForRadio}
-                defaultValue="24h"
+                defaultValue="all"
                 optionType="button"
                 buttonStyle="solid"
                 onChange={(event) => changePeriod(event.target.value)}

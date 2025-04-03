@@ -5,6 +5,8 @@ import PropTypes from 'prop-types';
 import AssetInfoTableForModal from './AssetInfoTableForModal.jsx';
 import RadioGroupForChangePeriod from './RadioGroupForChangePeriod.jsx';
 import ChartForModal from './ChartForModal.jsx';
+import { useChartDataContext } from '../context/ChartDataContext.jsx';
+import { useEffect } from 'react';
 
 export default function AssetInfoModal({ coin }) {
     return (
@@ -36,7 +38,6 @@ export default function AssetInfoModal({ coin }) {
                         ],
                     },
                 ]}
-                onSelect={''}
             />
         </>
     );
