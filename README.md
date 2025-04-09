@@ -1,8 +1,38 @@
-# React + Vite
+# CoinAssetDraw
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Данное приложение поможет людям отслеживать рост/падение своего портфеля (для различных криптовалют), а также отслеживать транзакции в сети blockchain.
 
-Currently, two official plugins are available:
+## 🔧 Технологии
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- React
+- Ant Design
+- Vite
+- Git
+- react-chartjs-2
+- ... (В дальнейшем будет добавляться)
+
+## 📦 Возможности
+
+- Просмотр криптопортфеля
+- Добавление новых поступлений разных криптовалют
+- отслеживание цен различных криптовалют по графику
+- Интеграция с Bitcoin-эксплорером (скоро)
+- Отслеживание роста/падения общей цены портфеля (скоро)
+
+## 🔜 Планы по доработке 
+
+- Добавить авторизацию через токены
+- Интегрировать React Router, TanStack Query, возможно Redux (если контекст будет сильно разрастаться)
+- Написать простой backend
+- Перевод на TypeScript
+
+## 🚀 Запуск проекта
+
+Инструкции по локальному запуску:
+
+```bash
+git clone https://github.com/ValeriannkkaS/CoinAssetDraw.git
+cd ReactCrypto
+npm install
+npm run dev
+```
