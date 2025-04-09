@@ -1,5 +1,5 @@
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
-import { Pie } from 'react-chartjs-2';
+import { Doughnut } from 'react-chartjs-2';
 import { useCryptoContext } from '../context/CryptoContext';
 import { capitalize } from '../utils';
 
@@ -44,7 +44,7 @@ export default function PortfolioChart() {
                 height: '50vh',
             }}
         >
-            <Pie data={data} />
+            <Doughnut data={data} />
         </div>
     );
 }

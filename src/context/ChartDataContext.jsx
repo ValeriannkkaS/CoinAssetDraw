@@ -13,7 +13,7 @@ export const useChartDataContext = () => {
 export default function ChartDataContextProvider({ children }) {
     const [chartData, setChartData] = useState(null);
     const [period, setPeriod] = useState('all');
-    const [coin, setCoin] = useState('bitcoin');
+    const [coin, setCoin] = useState(null);
     const [error, setError] = useState(null);
     const [grow, setGrow] = useState(true);
 
@@ -22,19 +22,20 @@ export default function ChartDataContextProvider({ children }) {
     useEffect(() => {
         const fetchData = async () => {
             setLoading(true);
+            if (!coin || !period) return;
             try {
                 const data = await fetchChartsData(coin, period);
                 setChartData(data);
                 setGrow(data[0][1] < data.at(-1)[1]);
             } catch (error) {
                 setError(error.message);
-                console.error(error);
+                console.log(error);
             } finally {
                 setLoading(false);
             }
         };
         fetchData();
-    }, [period, coin]);
+    }, [period, coin, error]);
 
     const changePeriod = (period) => {
         setPeriod(period);

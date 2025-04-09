@@ -38,7 +38,7 @@ ChartJS.register(
 export default function ChartForModal({ coin }) {
     const [gradient, setGradient] = useState('rgb(205, 0, 0)');
 
-    const chartRef = useRef(null);
+    const chartRef = useRef('');
 
     const { loading, error, changeCoin, changeError, chartData, grow } =
         useChartDataContext();
@@ -49,6 +49,7 @@ export default function ChartForModal({ coin }) {
     useEffect(() => {
         const ctx = chartRef.current.ctx;
         const chartArea = chartRef.current.chartArea;
+        if (!chartArea) return;
         const gradientFill = ctx.createLinearGradient(
             0,
             chartArea.top,
@@ -59,11 +60,10 @@ export default function ChartForModal({ coin }) {
             0,
             grow ? 'rgb(0, 185, 45)' : 'rgb(255, 0, 0)',
         ); // Верх - голубой
+
         gradientFill.addColorStop(1, 'rgb(205, 205, 205)'); // Низ - розовый
 
         setGradient(gradientFill);
-
-        if (!chartArea) return;
     }, [chartData]);
 
     if (loading) {

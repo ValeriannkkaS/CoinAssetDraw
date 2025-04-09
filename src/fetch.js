@@ -25,7 +25,8 @@ const optionsForFetchChartData = {
     //приблизительная функция для запросов
     method: 'GET',
     headers: {
-        'X-API-KEY': 'LofoS1PFtXimDDDNvfCdMSh9OoJWY83QWMbIcgfLrFI=',
+        accept: 'application/json',
+        'X-API-KEY': '5FzX4vtkxxlqvkl2O2FfrfjLyNYuH5++UVmPhlJzfNY=',
     },
 };
 export const fetchChartsData = async (coin, period) => {
@@ -34,10 +35,10 @@ export const fetchChartsData = async (coin, period) => {
             `https://openapiv1.coinstats.app/coins/${coin}/charts?period=${period}`,
             optionsForFetchChartData,
         );
-        if (!response.ok) throw new Error('Coins not found');
+        //if (!response.ok) throw new Error('Coins not found');
         return await response.json();
     } catch (error) {
-        console.log(error);
+        console.log(error.message);
         throw error;
     }
 };
