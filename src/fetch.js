@@ -1,9 +1,12 @@
+const COIN_STATS_API_KEY = import.meta.env.VITE_COIN_STATS_API_KEY;
+const COIN_GECKO_API_KEY = import.meta.env.VITE_COIN_GECKO_API_KEY;
+
 const optionsForFetchPriceByTime = {
     //временное решение (дает только на дату, не на время)
     method: 'GET',
     headers: {
         accept: 'application/json',
-        'x-cg-api-key': 'CG-fFYANEwdjEAEojrzbuRqd7jJ',
+        'x-cg-api-key': COIN_GECKO_API_KEY,
     },
 };
 export const getPriceByTime = async (date, coin) => {
@@ -26,7 +29,7 @@ const optionsForFetchChartData = {
     method: 'GET',
     headers: {
         accept: 'application/json',
-        'X-API-KEY': '5FzX4vtkxxlqvkl2O2FfrfjLyNYuH5++UVmPhlJzfNY=',
+        'X-API-KEY': COIN_STATS_API_KEY,
     },
 };
 export const fetchChartsData = async (coin, period) => {
@@ -35,7 +38,7 @@ export const fetchChartsData = async (coin, period) => {
             `https://openapiv1.coinstats.app/coins/${coin}/charts?period=${period}`,
             optionsForFetchChartData,
         );
-        //if (!response.ok) throw new Error('Coins not found');
+        if (!response.ok) throw new Error('Coins not found');
         return await response.json();
     } catch (error) {
         console.log(error.message);
