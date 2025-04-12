@@ -7,8 +7,9 @@ import PortfolioChartValueChange from '../PortfolioChartValueChange.jsx';
 
 const contentStyle = {
     textAlign: 'center',
-    minHeight: 'calc(100vh - 60px)',
     padding: '1rem',
+    minHeight: 'calc(100vh - 60px)',
+    maxHeight: '120vh',
     overflowY: 'scroll',
     scrollbarWidth: 'thin',
 };

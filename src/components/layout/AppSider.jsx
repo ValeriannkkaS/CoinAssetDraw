@@ -17,7 +17,8 @@ import AssetInfoModal from '../AssetInfoModal';
 
 const siderStyle = {
     padding: '0.5rem',
-    height: 'calc(100vh - 60px)',
+    minHeight: 'calc(100vh - 60px)',
+    maxHeight: '120vh',
     overflowY: 'scroll',
     scrollbarWidth: 'thin',
 };
