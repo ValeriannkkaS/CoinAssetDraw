@@ -32,13 +32,13 @@ export default function AppContent() {
             <Typography.Title
                 level={3}
                 style={{
-                    textAlign: 'left',
+                    textAlign: 'center',
                 }}
             >
-                Portfolio{' '}
+                Portfolio {/*потом будет для каждого портфеля*/}
                 {assets
                     .map((asset) => {
-                        return asset.amount * cryptoPriceMap[asset.id];
+                        return asset.totalAmount * cryptoPriceMap[asset.id];
                     })
                     .reduce((accum, value) => (accum += value), 0)
                     .toFixed(2)}

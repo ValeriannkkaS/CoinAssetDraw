@@ -630,63 +630,18 @@ export const cryptoAssets = [
         id: 'bitcoin',
         transactions: [
             {
-                amount: 0.0636,
+                amount: 0.00636,
                 price: 84547,
                 date: '20-03-2025',
             },
             {
-                amount: 0.0453,
+                amount: 0.00453,
                 price: 90431,
                 date: '05-03-2025',
             },
             {
-                amount: 0.0636,
+                amount: 0.00636,
                 price: 86547,
-                date: '20-03-2025',
-            },
-            {
-                amount: 0.0453,
-                price: 91431,
-                date: '05-03-2025',
-            },
-            {
-                amount: 0.0636,
-                price: 83547,
-                date: '20-03-2025',
-            },
-            {
-                amount: 0.0453,
-                price: 89431,
-                date: '05-03-2025',
-            },
-            {
-                amount: 0.0636,
-                price: 85547,
-                date: '20-03-2025',
-            },
-            {
-                amount: 0.0453,
-                price: 92431,
-                date: '05-03-2025',
-            },
-            {
-                amount: 0.0453,
-                price: 91431,
-                date: '05-03-2025',
-            },
-            {
-                amount: 0.0636,
-                price: 83547,
-                date: '20-03-2025',
-            },
-            {
-                amount: 0.0453,
-                price: 91431,
-                date: '05-03-2025',
-            },
-            {
-                amount: 0.0636,
-                price: 83547,
                 date: '20-03-2025',
             },
         ],
