@@ -7,13 +7,15 @@ import {
     Drawer,
     Switch,
     Flex,
+    Popover,
 } from 'antd';
-import { SunOutlined, MoonOutlined } from '@ant-design/icons';
+import { SunOutlined, MoonOutlined, UserOutlined } from '@ant-design/icons';
 import { useCryptoContext } from '../../context/CryptoContext';
 import { useState, useEffect } from 'react';
 import CoinInfoModal from '../CoinInfoModal';
 import AddAssetsForDraw from '../AddAssetsForDraw';
 import { useThemeContext } from '../../context/ThemeContext';
+import { darkTheme, lightTheme } from '../../lightVsDarkTheme.js';
 
 const headerStyle = {
     width: '100%',
@@ -24,6 +26,13 @@ const headerStyle = {
     justifyContent: 'space-between',
     alignItems: 'center',
 };
+const contentForPopover = (
+    <>
+        <div>1</div>
+        <div>2</div>
+        <div>3</div>
+    </>
+);
 
 export default function AppHeader() {
     const [select, setSelect] = useState(false);
@@ -69,36 +78,54 @@ export default function AppHeader() {
                 ...headerStyle,
             }}
         >
-            <Select
-                style={{
-                    width: 250,
-                    flex: 1,
-                    maxWidth: 250,
-                }}
-                open={select}
-                onSelect={handleSelect}
-                onClick={() => setSelect((prev) => !prev)}
-                value="press Alt+Enter to open/close"
-                options={crypto.map((coin) => {
-                    return {
-                        value: coin.id,
-                        label: coin.name,
-                        icon: coin.icon,
-                    };
-                })}
-                optionRender={(option) => (
-                    <Space>
-                        <img
-                            src={option.data.icon}
-                            style={{
-                                width: 20,
-                            }}
-                            title={option.data.label}
-                        />
-                        {option.data.label}
-                    </Space>
+            <Flex align={'center'} gap={10}>
+                <img
+                    src={'../../../public/coin-svgrepo-com.svg'}
+                    style={{ height: '2rem' }}
+                />
+                {theme === lightTheme && (
+                    <img
+                        src={'../../../public/textLogoForLightTheme.svg'}
+                        style={{ height: '1.5rem' }}
+                    />
                 )}
-            />
+                {theme === darkTheme && (
+                    <img
+                        src={'../../../public/textLogoForDarkTheme.svg'}
+                        style={{ height: '1.5rem' }}
+                    />
+                )}
+                <Select
+                    style={{
+                        width: 250,
+                        flex: 1,
+                        maxWidth: 250,
+                    }}
+                    open={select}
+                    onSelect={handleSelect}
+                    onClick={() => setSelect((prev) => !prev)}
+                    value="press Alt+Enter to open/close"
+                    options={crypto.map((coin) => {
+                        return {
+                            value: coin.id,
+                            label: coin.name,
+                            icon: coin.icon,
+                        };
+                    })}
+                    optionRender={(option) => (
+                        <Space>
+                            <img
+                                src={option.data.icon}
+                                style={{
+                                    width: 20,
+                                }}
+                                title={option.data.label}
+                            />
+                            {option.data.label}
+                        </Space>
+                    )}
+                />
+            </Flex>
 
             <Modal
                 title="information about cryptocurrency:"
@@ -118,6 +145,9 @@ export default function AppHeader() {
                 <AddAssetsForDraw onClose={() => setDrawer(false)} />
             </Drawer>
             <Flex align="center" gap={20}>
+                <Popover title={'user info'} content={contentForPopover}>
+                    <UserOutlined />
+                </Popover>
                 <Switch
                     checkedChildren={<SunOutlined />}
                     unCheckedChildren={<MoonOutlined />}
