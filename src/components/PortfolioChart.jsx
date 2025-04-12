@@ -1,15 +1,13 @@
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
-import { Card, Typography } from 'antd';
 import { Doughnut } from 'react-chartjs-2';
 import { useCryptoContext } from '../context/CryptoContext';
 import { capitalize } from '../utils';
-import { useThemeContext } from '../context/ThemeContext.jsx';
+import CardForMainCharts from './CardForMainCharts.jsx';
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
 export default function PortfolioChart() {
     const { assets } = useCryptoContext();
-    const { theme } = useThemeContext();
 
     const data = {
         labels: assets.map((asset) => capitalize(asset.id)),
@@ -39,42 +37,21 @@ export default function PortfolioChart() {
     };
 
     return (
-        <div
-            style={{
-                display: 'flex',
-                padding: '0.5rem',
-                flexDirection: 'column',
-                alignItems: 'center',
-                justifyContent: 'center',
-                marginBottom: '1rem',
-                width: '50%',
-                borderRadius: '1rem',
-                border: '1px solid ',
-                borderColor: theme.cards.border,
-                backgroundColor: theme.cards.background,
-            }}
-        >
-            <Typography.Title level={3}>
-                Сryptocurrency distribution:
-            </Typography.Title>
-            <div
-                style={{ height: '50vh', width: '100%', position: 'relative' }}
-            >
-                <Doughnut
-                    data={data}
-                    options={{
-                        cutout: '85%',
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        plugins: {
-                            legend: {
-                                display: true,
-                                position: 'right',
-                            }, // или position: 'bottom'
-                        },
-                    }}
-                />
-            </div>
-        </div>
+        <CardForMainCharts title={'Cryptocurrency distibution:'}>
+            <Doughnut
+                data={data}
+                options={{
+                    cutout: '85%',
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: true,
+                            position: 'right',
+                        }, // или position: 'bottom'
+                    },
+                }}
+            />
+        </CardForMainCharts>
     );
 }
