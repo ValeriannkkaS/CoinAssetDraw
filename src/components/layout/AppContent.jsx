@@ -1,8 +1,9 @@
-import { Layout, Typography } from 'antd';
+import { Flex, Layout, Typography } from 'antd';
 import { useThemeContext } from '../../context/ThemeContext';
 import { useCryptoContext } from '../../context/CryptoContext';
-import PortfolioChart from '../PortfolioChart';
+import PortfolioChartDistribution from '../PortfolioChartDistribution.jsx';
 import AssetsTable from '../AssetsTable';
+import PortfolioChartValueChange from '../PortfolioChartValueChange.jsx';
 
 const contentStyle = {
     textAlign: 'center',
@@ -44,7 +45,10 @@ export default function AppContent() {
                     .toFixed(2)}
                 $
             </Typography.Title>
-            <PortfolioChart />
+            <Flex gap={15}>
+                <PortfolioChartValueChange />
+                <PortfolioChartDistribution />
+            </Flex>
             <AssetsTable />
         </Layout.Content>
     );

@@ -6,7 +6,7 @@ import CardForMainCharts from './CardForMainCharts.jsx';
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
-export default function PortfolioChart() {
+export default function PortfolioChartDistribution() {
     const { assets } = useCryptoContext();
 
     const data = {
