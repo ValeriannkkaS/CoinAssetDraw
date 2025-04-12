@@ -2,7 +2,7 @@ import { Flex, Layout, Typography } from 'antd';
 import { useThemeContext } from '../../context/ThemeContext';
 import { useCryptoContext } from '../../context/CryptoContext';
 import PortfolioChartDistribution from '../PortfolioChartDistribution.jsx';
-import AssetsTable from '../AssetsTable';
+import MarketCapBarChart from '../MarketCapBarChart.jsx';
 import PortfolioChartValueChange from '../PortfolioChartValueChange.jsx';
 
 const contentStyle = {
@@ -49,7 +49,7 @@ export default function AppContent() {
                 <PortfolioChartValueChange />
                 <PortfolioChartDistribution />
             </Flex>
-            <AssetsTable />
+            <MarketCapBarChart />
         </Layout.Content>
     );
 }

@@ -1,7 +1,7 @@
 import { Typography } from 'antd';
 import { useThemeContext } from '../context/ThemeContext.jsx';
 
-export default function CardForMainCharts({ children, title }) {
+export default function CardForMainCharts({ children, title, centered }) {
     const { theme } = useThemeContext();
 
     return (
@@ -13,7 +13,7 @@ export default function CardForMainCharts({ children, title }) {
                 alignItems: 'center',
                 justifyContent: 'center',
                 marginBottom: '1rem',
-                width: '50%',
+                width: centered ? '100%' : '50%',
                 borderRadius: '1rem',
                 border: '1px solid ',
                 borderColor: theme.cards.border,
@@ -22,7 +22,12 @@ export default function CardForMainCharts({ children, title }) {
         >
             <Typography.Title level={3}>{title}</Typography.Title>
             <div
-                style={{ height: '50vh', width: '100%', position: 'relative' }}
+                style={{
+                    height: '50vh',
+                    width: '100%',
+                    position: 'relative',
+                    margin: '0 auto',
+                }}
             >
                 {children}
             </div>
