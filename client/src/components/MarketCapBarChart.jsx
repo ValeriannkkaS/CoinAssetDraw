@@ -1,20 +1,40 @@
-import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
-import { Doughnut } from 'react-chartjs-2';
-import { useCryptoContext } from '../context/CryptoContext';
-import { capitalize } from '../utils';
+import { useCryptoContext } from '../context/CryptoContext.jsx';
+import { Bar } from 'react-chartjs-2';
+import {
+    Chart as ChartJS,
+    CategoryScale,
+    LinearScale,
+    BarElement,
+    Title,
+    Tooltip,
+    Legend,
+} from 'chart.js';
 import CardForMainCharts from './CardForMainCharts.jsx';
 
-ChartJS.register(ArcElement, Tooltip, Legend);
+ChartJS.register(
+    CategoryScale,
+    LinearScale,
+    BarElement,
+    Title,
+    Tooltip,
+    Legend,
+);
+export default function MarketCapBarChart() {
+    const { crypto } = useCryptoContext();
+    const data = crypto.map((slice) => {
+        return {
+            id: slice.id,
+            marketCap: slice.marketCap,
+        };
+    });
+    const sortedData = data.sort((a, b) => b.marketCap - a.marketCap);
 
-export default function PortfolioChartDistribution() {
-    const { assets } = useCryptoContext();
-
-    const data = {
-        labels: assets.map((asset) => capitalize(asset.id)),
+    const data1 = {
+        labels: sortedData.map((slice) => slice.id), // Названия категорий
         datasets: [
             {
-                label: 'Total amount ($)',
-                data: assets.map((asset) => asset.totalInvested),
+                data: sortedData.map((slice) => slice.marketCap),
+                label: '$',
                 backgroundColor: [
                     'rgba(0, 204, 255, 0.8)', // Голубой
                     'rgba(255, 105, 180, 0.8)', // Леденцовый розовый
@@ -48,21 +68,41 @@ export default function PortfolioChartDistribution() {
         ],
     };
 
-    return (
-        <CardForMainCharts title={'Cryptocurrency distibution:'}>
-            <Doughnut
-                data={data}
-                options={{
-                    cutout: '85%',
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: {
-                        legend: {
-                            display: true,
-                            position: 'right',
-                        },
+    // Опции для графика
+    const options = {
+        responsive: true,
+        plugins: {
+            legend: {
+                display: false,
+            },
+            tooltip: {
+                intersect: false,
+            },
+        },
+        indexAxis: 'y',
+        scales: {
+            x: {
+                ticks: {
+                    callback: function (value) {
+                        return value + ' B';
                     },
-                }}
+                },
+            },
+            y: {
+                title: {
+                    display: true,
+                    text: 'Cryptocurrencies',
+                },
+            },
+        },
+    };
+
+    return (
+        <CardForMainCharts title={'Market Cap'} centered={true} full={true}>
+            <Bar
+                data={data1}
+                options={options}
+                style={{ margin: 'auto', height: '100%' }}
             />
         </CardForMainCharts>
     );

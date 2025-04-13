@@ -1,7 +1,7 @@
-import { CryptoContextProvider } from './context/CryptoContext';
-import AppLayout from './components/layout/AppLayout';
-import { ThemeContextProvider } from './context/ThemeContext';
-import ConfigProviderForElements from './context/ConfigProviderForElements';
+import { CryptoContextProvider } from './context/CryptoContext.jsx';
+import AppLayout from './layout/AppLayout.jsx';
+import { ThemeContextProvider } from './context/ThemeContext.jsx';
+import ConfigProviderForElements from './context/ConfigProviderForElements.jsx';
 import ChartDataContext from './context/ChartDataContext.jsx';
 
 export default function App() {

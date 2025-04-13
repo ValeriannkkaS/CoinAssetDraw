@@ -9,11 +9,11 @@ import {
     Popover,
 } from 'antd';
 import { ArrowUpOutlined, ArrowDownOutlined } from '@ant-design/icons';
-import { capitalize } from '../../utils';
-import { useCryptoContext } from '../../context/CryptoContext';
-import { useThemeContext } from '../../context/ThemeContext';
+import { capitalize } from '../utils.js';
+import { useCryptoContext } from '../context/CryptoContext.jsx';
+import { useThemeContext } from '../context/ThemeContext.jsx';
 import { useState } from 'react';
-import AssetInfoModal from '../AssetInfoModal';
+import AssetInfoModal from '../components/AssetInfoModal.jsx';
 
 const siderStyle = {
     padding: '0.5rem',

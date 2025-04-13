@@ -1,8 +1,8 @@
 import { Flex, Typography, Tag, Divider, QRCode } from 'antd';
 import { RedditOutlined, TwitterOutlined } from '@ant-design/icons';
-import CoinImageDescription from './CoinImageDescription';
-import { useThemeContext } from '../context/ThemeContext';
-import CoinTrendInformation from './CoinTrendInformation';
+import CoinImageDescription from './CoinImageDescription.jsx';
+import { useThemeContext } from '../context/ThemeContext.jsx';
+import CoinTrendInformation from './CoinTrendInformation.jsx';
 import PropTypes from 'prop-types';
 
 export default function CoinInfoModal({ coin }) {

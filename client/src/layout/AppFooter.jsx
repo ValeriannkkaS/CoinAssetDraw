@@ -1,5 +1,5 @@
 import { Layout } from 'antd';
-import { useThemeContext } from '../../context/ThemeContext';
+import { useThemeContext } from '../context/ThemeContext.jsx';
 
 const footerStyle = {
     height: 80,

@@ -1,0 +1,15 @@
+{
+  "cryptoAssets": [
+    {
+      "id": "bitcoin",
+      "name": "Bitcoin",
+      "transactions": [
+        {
+          "amount": 0.1,
+          "price": 50000,
+          "date": "2025-04-12"
+        }
+      ]
+    }
+  ]
+}

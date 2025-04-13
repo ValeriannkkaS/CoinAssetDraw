@@ -10,10 +10,10 @@ import {
     DatePicker,
     Result,
 } from 'antd';
-import { useCryptoContext } from '../context/CryptoContext';
-import CoinImageDescription from './CoinImageDescription';
-import { dateToString } from '../utils';
-import { getPriceByTime } from '../fetch';
+import { useCryptoContext } from '../context/CryptoContext.jsx';
+import CoinImageDescription from './CoinImageDescription.jsx';
+import { dateToString } from '../utils.js';
+import { getPriceByTime } from '../../fetch.js';
 import PropTypes from 'prop-types';
 
 const validateMessages = {

@@ -10,12 +10,12 @@ import {
     Popover,
 } from 'antd';
 import { SunOutlined, MoonOutlined, UserOutlined } from '@ant-design/icons';
-import { useCryptoContext } from '../../context/CryptoContext';
+import { useCryptoContext } from '../context/CryptoContext.jsx';
 import { useState, useEffect } from 'react';
-import CoinInfoModal from '../CoinInfoModal';
-import AddAssetsForDraw from '../AddAssetsForDraw';
-import { useThemeContext } from '../../context/ThemeContext';
-import { darkTheme, lightTheme } from '../../lightVsDarkTheme.js';
+import CoinInfoModal from '../components/CoinInfoModal.jsx';
+import AddAssetsForDraw from '../components/AddAssetsForDraw.jsx';
+import { useThemeContext } from '../context/ThemeContext.jsx';
+import { darkTheme, lightTheme } from '../lightVsDarkTheme.js';
 
 const headerStyle = {
     width: '100%',
@@ -79,20 +79,17 @@ export default function AppHeader() {
             }}
         >
             <Flex align={'center'} gap={10}>
-                <img
-                    src={'../../../public/coin-svgrepo-com.svg'}
-                    style={{ height: '2rem' }}
-                />
+                <img src={'/coin-svgrepo-com.svg'} style={{ height: '2rem' }} />
                 {theme === lightTheme && (
                     <img
-                        src={'../../../public/textLogoForLightTheme.svg'}
-                        style={{ height: '1.5rem' }}
+                        src={'/textLogoForLightTheme.svg'}
+                        style={{ height: '1rem' }}
                     />
                 )}
                 {theme === darkTheme && (
                     <img
-                        src={'../../../public/textLogoForDarkTheme.svg'}
-                        style={{ height: '1.5rem' }}
+                        src={'/textLogoForDarkTheme.svg'}
+                        style={{ height: '1rem' }}
                     />
                 )}
                 <Select

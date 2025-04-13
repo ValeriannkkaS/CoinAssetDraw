@@ -1,9 +1,9 @@
 import { Flex, Layout, Typography } from 'antd';
-import { useThemeContext } from '../../context/ThemeContext';
-import { useCryptoContext } from '../../context/CryptoContext';
-import PortfolioChartDistribution from '../PortfolioChartDistribution.jsx';
-import MarketCapBarChart from '../MarketCapBarChart.jsx';
-import PortfolioChartValueChange from '../PortfolioChartValueChange.jsx';
+import { useThemeContext } from '../context/ThemeContext.jsx';
+import { useCryptoContext } from '../context/CryptoContext.jsx';
+import PortfolioChartDistribution from '../components/PortfolioChartDistribution.jsx';
+import MarketCapBarChart from '../components/MarketCapBarChart.jsx';
+import PortfolioChartValueChange from '../components/PortfolioChartValueChange.jsx';
 
 const contentStyle = {
     textAlign: 'center',

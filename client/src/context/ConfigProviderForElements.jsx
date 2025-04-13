@@ -1,5 +1,5 @@
 import { ConfigProvider } from 'antd';
-import { useThemeContext } from './ThemeContext';
+import { useThemeContext } from './ThemeContext.jsx';
 import { PropTypes } from 'prop-types';
 
 export default function ConfigProviderForElements({ children }) {

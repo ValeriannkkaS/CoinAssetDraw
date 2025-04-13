@@ -1,6 +1,6 @@
-import CoinImageDescription from './CoinImageDescription';
+import CoinImageDescription from './CoinImageDescription.jsx';
 import { Divider, Tabs, Typography } from 'antd';
-import CoinTrendInformation from './CoinTrendInformation';
+import CoinTrendInformation from './CoinTrendInformation.jsx';
 import PropTypes from 'prop-types';
 import AssetInfoTableForModal from './AssetInfoTableForModal.jsx';
 import RadioGroupForChangePeriod from './RadioGroupForChangePeriod.jsx';

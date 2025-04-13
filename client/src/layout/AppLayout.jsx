@@ -1,9 +1,9 @@
-import AppHeader from './AppHeader';
+import AppHeader from './AppHeader.jsx';
 import { Layout, Spin } from 'antd';
-import AppSider from './AppSider';
-import AppContent from './AppContent';
-import { useCryptoContext } from '../../context/CryptoContext';
-import AppFooter from './AppFooter';
+import AppSider from './AppSider.jsx';
+import AppContent from './AppContent.jsx';
+import { useCryptoContext } from '../context/CryptoContext.jsx';
+import AppFooter from './AppFooter.jsx';
 
 export default function AppLayout() {
     const { loading } = useCryptoContext();

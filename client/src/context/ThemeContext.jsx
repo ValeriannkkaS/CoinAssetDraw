@@ -1,5 +1,5 @@
 import { createContext, useContext, useState } from 'react';
-import { lightTheme, darkTheme } from '../lightVsDarkTheme';
+import { lightTheme, darkTheme } from '../lightVsDarkTheme.js';
 import { PropTypes } from 'prop-types';
 
 const ThemeContext = createContext({
