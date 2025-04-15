@@ -1,43 +1,24 @@
 // server/server.js
 import express from 'express';
-import { Low } from 'lowdb';
-import { JSONFile } from 'lowdb/node';
+import dotenv from 'dotenv';
+import { connectDB } from './src/config/mongodb.js';
+
+dotenv.config();
+
+await connectDB(); // подключение к бд (не забыть запустить докер-контейнер с базой!!!!!)
 
 const app = express();
-
-
 app.use(express.json());
 
-async function init() {
-
-
-
-
-    const mockDb = {
-        cryptoAssets: [
-            {
-                id: "bitcoin",
-                name: "Bitcoin",
-                transactions: [
-                    {
-                        amount: 0.1,
-                        price: 50000,
-                        date: "2025-04-12"
-                    }
-                ]
-            }
-        ]
-    };
-
-    app.get('/cryptoAssets', (req, res) => {
-        res.json(mockDb.cryptoAssets);
+async function main() {
+    app.post('/', (req, res) => {
+        console.log(req.body);
+        res.status(200).json('Сервер работает');
     });
 
     app.listen(3001, () => {
-        console.log('✅ Server running on http://localhost:3001');
+        console.log('listening on port 3001');
     });
 }
 
-init().catch(err => {
-    console.error('❌ Failed to start server:', err);
-});
+main();
