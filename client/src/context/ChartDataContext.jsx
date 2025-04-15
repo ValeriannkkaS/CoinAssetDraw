@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useState } from 'react';
-import { fetchChartsData } from '../../fetch.js';
+import { fetchChartsData } from '../fetch.js';
 import { PropTypes } from 'prop-types';
 
 const ChartDataContext = createContext({

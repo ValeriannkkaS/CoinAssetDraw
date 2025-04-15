@@ -13,7 +13,7 @@ import {
 import { useCryptoContext } from '../context/CryptoContext.jsx';
 import CoinImageDescription from './CoinImageDescription.jsx';
 import { dateToString } from '../utils.js';
-import { getPriceByTime } from '../../fetch.js';
+import { getPriceByTime } from '../fetch.js';
 import PropTypes from 'prop-types';
 
 const validateMessages = {
