@@ -1,10 +1,9 @@
-import { User } from '../models/User.js';
+import UserServices from '../services/userServices.js';
 
 class UserController {
     async register(req, res) {
         try {
-            const { email, passwordHash, portfolios } = req.body;
-            const user = await User.create({ email, passwordHash, portfolios });
+            const user = await UserServices.register(req.body);
             res.status(200).json(user);
         } catch (err) {
             res.status(500).json({ err });
@@ -14,8 +13,8 @@ class UserController {
     async login(req, res) {
         //////пока что просто проставка
         try {
-            const { email, passwordHash, portfolios } = req.body;
-            res.status(200).json({ email, passwordHash, portfolios });
+            const user = await UserServices.login(req.body);
+            res.status(200).json(user);
         } catch (err) {
             res.status(500).json({ err });
         }
@@ -23,22 +22,16 @@ class UserController {
 
     async updateUserById(req, res) {
         try {
-            const user = req.body;
-            if (!user._id) {
-                return res.status(404).json({ err: 'Post not found' });
-            }
-            const updatedUser = await User.findByIdAndUpdate(user._id, user, {
-                new: true,
-            });
+            const updatedUser = await UserServices.updateUserById(req.body);
             return res.status(200).json(updatedUser);
         } catch (err) {
-            res.status(500).json({ err });
+            res.status(500).json(err.message);
         }
     }
 
     async getAllUsers(req, res) {
         try {
-            const users = await User.find();
+            const users = await UserServices.getAllUsers();
             return res.status(200).json(users);
         } catch (err) {
             res.status(500).json({ err });
@@ -47,8 +40,7 @@ class UserController {
 
     async getUserById(req, res) {
         try {
-            const { id } = req.params;
-            const user = await User.findById(id);
+            const user = await UserServices.getUserById(req.params.id);
             return res.status(200).json(user);
         } catch (err) {
             res.status(500).json({ err });
@@ -57,8 +49,9 @@ class UserController {
 
     async deleteUserById(req, res) {
         try {
-            const { id } = req.params;
-            const deletedUser = await User.findByIdAndDelete(id);
+            const deletedUser = await UserServices.deleteUserById(
+                req.params.id,
+            );
             return res.status(200).json(deletedUser);
         } catch (err) {
             res.status(500).json({ err });
