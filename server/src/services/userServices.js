@@ -2,9 +2,12 @@ import { UserModel } from '../models/User.js';
 import bcrypt from 'bcrypt';
 import { v4 as uuidv4 } from 'uuid';
 import mailServices from './mailServices.js';
+import TokenServices from './tokenServices.js';
+import { UserDto } from '../dtos/user.dto.js';
+import tokenServices from './tokenServices.js';
 
 class UserServices {
-    async registration({ email, password }) {
+    async registration(email, password) {
         const candidate = await UserModel.findOne({ email });
 
         if (candidate) {
@@ -22,6 +25,16 @@ class UserServices {
             activationLink,
             portfolios: [],
         });
+        await mailServices.sendActivationEmail(email, activationLink);
+
+        const userDto = new UserDto(createdUser); // создаем экземпляр payload для генерации токена
+        const tokens = TokenServices.generateTokens({ ...userDto }); //передаем обычный объект, а не instance UserDto
+        await tokenServices.saveToken(userDto.id, tokens.refreshToken);
+
+        return {
+            ...tokens,
+            user: userDto,
+        };
     }
 
     async login(user) {

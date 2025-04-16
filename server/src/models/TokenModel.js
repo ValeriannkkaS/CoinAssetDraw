@@ -5,4 +5,4 @@ const TokenShema = new mongoose.Schema({
     refreshToken: { type: String, required: true },
 });
 
-export const User = mongoose.model('User', UserShema);
+export const TokenModel = mongoose.model('Token', TokenShema);
