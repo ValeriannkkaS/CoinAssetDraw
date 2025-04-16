@@ -7,7 +7,7 @@ import { UserDto } from '../dtos/user.dto.js';
 import tokenServices from './tokenServices.js';
 
 class UserServices {
-    async registration(email, password) {
+    async registration(email, password, username) {
         const candidate = await UserModel.findOne({ email });
 
         if (candidate) {
@@ -21,11 +21,20 @@ class UserServices {
 
         const createdUser = await UserModel.create({
             email,
+            username,
             password: passwordHash,
             activationLink,
             portfolios: [],
         });
-        await mailServices.sendActivationEmail(email, activationLink);
+        try {
+            await mailServices.sendActivationEmail(
+                email,
+                username,
+                `${process.env.API_URL}/api/users/activate/${activationLink}`,
+            );
+        } catch (err) {
+            console.log(err);
+        }
 
         const userDto = new UserDto(createdUser); // создаем экземпляр payload для генерации токена
         const tokens = TokenServices.generateTokens({ ...userDto }); //передаем обычный объект, а не instance UserDto

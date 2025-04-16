@@ -19,7 +19,7 @@ class TokenServices {
         // сохраняем токен в бд
         const tokenData = await TokenModel.findOne({ user: userId });
         if (tokenData) {
-            tokenData.refreshToken = refreshToken;
+            tokenData.refreshToken = refreshToken; // здесь  логику можно чуть подправить, чтобы не выкидывало из аккаунта, если зайти с другого устройства
             return tokenData.save();
         }
         const token = await TokenModel.create({
