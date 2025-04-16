@@ -1,16 +1,16 @@
 import UserServices from '../services/userServices.js';
 
 class UserController {
-    async register(req, res) {
+    async registration(req, res, next) {
         try {
-            const user = await UserServices.register(req.body);
+            const user = await UserServices.registration(req.body);
             res.status(200).json(user);
         } catch (err) {
-            res.status(500).json({ err });
+            res.status(500).json(err.message);
         }
     }
 
-    async login(req, res) {
+    async login(req, res, next) {
         //////пока что просто проставка
         try {
             const user = await UserServices.login(req.body);
@@ -18,6 +18,21 @@ class UserController {
         } catch (err) {
             res.status(500).json({ err });
         }
+    }
+
+    async logout(req, res, next) {
+        try {
+        } catch (err) {}
+    }
+
+    async refresh(req, res, next) {
+        try {
+        } catch (err) {}
+    }
+
+    async activate(req, res, next) {
+        try {
+        } catch (err) {}
     }
 
     async updateUserById(req, res) {

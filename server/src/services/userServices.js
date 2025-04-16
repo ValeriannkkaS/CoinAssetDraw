@@ -1,19 +1,37 @@
-import { User } from '../models/User.js';
+import { UserModel } from '../models/User.js';
+import bcrypt from 'bcrypt';
+import { v4 as uuidv4 } from 'uuid';
+import mailServices from './mailServices.js';
 
 class UserServices {
-    async register(user) {
-        const registeredUser = await User.create(user);
-        return registeredUser;
+    async registration({ email, password }) {
+        const candidate = await UserModel.findOne({ email });
+
+        if (candidate) {
+            throw new Error(
+                `A user with ${email} e-mail address already exists`,
+            );
+        }
+
+        const passwordHash = await bcrypt.hash(password, 10);
+        const activationLink = uuidv4();
+
+        const createdUser = await UserModel.create({
+            email,
+            password: passwordHash,
+            activationLink,
+            portfolios: [],
+        });
     }
 
     async login(user) {
         //////пока что просто проставка
-        const registeredUser = await User.create(user);
+        const registeredUser = await UserModel.create(user);
         return registeredUser;
     }
 
     async updateUserById(user) {
-        const updatedUser = await User.findByIdAndUpdate(user._id, user, {
+        const updatedUser = await UserModel.findByIdAndUpdate(user._id, user, {
             new: true,
         });
         if (!updatedUser) {
@@ -23,7 +41,7 @@ class UserServices {
     }
 
     async getAllUsers() {
-        const users = await User.find();
+        const users = await UserModel.find();
         return users;
     }
 
@@ -31,12 +49,12 @@ class UserServices {
         if (!id) {
             throw new Error('id is required');
         }
-        const user = await User.findById(id);
+        const user = await UserModel.findById(id);
         return user;
     }
 
     async deleteUserById(id) {
-        const deletedUser = await User.findByIdAndDelete(id);
+        const deletedUser = await UserModel.findByIdAndDelete(id);
         return deletedUser;
     }
 }
