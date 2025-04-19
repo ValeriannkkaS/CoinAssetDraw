@@ -1,5 +1,6 @@
 import jwt from 'jsonwebtoken';
 import { TokenModel } from '../models/TokenModel.js';
+import ApiError from '../exceptions/api-error.js';
 
 class TokenServices {
     generateTokens(payload) {
@@ -37,6 +38,41 @@ class TokenServices {
             expiresIn: new Date(Date.now() + 2.592e9),
         });
         return token;
+    }
+
+    async deleteSession(refreshToken) {
+        const userSession = await TokenModel.findOne({
+            refreshToken: refreshToken,
+        });
+        if (!userSession) {
+            throw ApiError.BadRequestError(
+                'Refresh token not found or already expired',
+            );
+        }
+        await TokenModel.deleteOne({ refreshToken: refreshToken });
+
+        return { message: 'Refresh token has been deleted.' };
+    }
+
+    async getIdByRefreshToken(refreshToken) {
+        const userSession = await TokenModel.findOne({
+            refreshToken: refreshToken,
+        });
+        if (!userSession) {
+            throw ApiError.BadRequestError(
+                'Refresh token not found or already expired',
+            );
+        }
+        return userSession.user;
+    }
+
+    async deleteAllSessions(user) {
+        const userSessions = await TokenModel.find({ user: user });
+        if (!userSessions) {
+            throw ApiError.BadRequestError('User not found');
+        }
+        await TokenModel.deleteMany({ user: user });
+        return { message: 'All refresh tokens has been deleted.' };
     }
 }
 

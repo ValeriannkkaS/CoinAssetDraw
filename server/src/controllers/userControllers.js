@@ -1,6 +1,7 @@
 import UserServices from '../services/userServices.js';
 import { validationResult } from 'express-validator';
 import ApiError from '../exceptions/api-error.js';
+import userServices from '../services/userServices.js';
 
 class UserController {
     async registration(req, res, next) {
@@ -46,6 +47,21 @@ class UserController {
 
     async logout(req, res, next) {
         try {
+            const { refreshToken } = req.cookies;
+            const result = await UserServices.logout(refreshToken);
+            res.clearCookie('refreshToken');
+            return res.status(200).json(result);
+        } catch (err) {
+            next(err);
+        }
+    }
+
+    async logoutAll(req, res, next) {
+        try {
+            const { refreshToken } = req.cookies;
+            const result = await userServices.logoutAll(refreshToken);
+            res.clearCookie('refreshToken');
+            return res.status(200).json(result);
         } catch (err) {
             next(err);
         }

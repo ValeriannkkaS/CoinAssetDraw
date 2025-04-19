@@ -83,6 +83,17 @@ class UserServices {
         };
     }
 
+    async logout(refreshToken) {
+        const result = await TokenServices.deleteSession(refreshToken);
+        return result;
+    }
+
+    async logoutAll(refreshToken) {
+        const user = await TokenServices.getIdByRefreshToken(refreshToken);
+        const result = await TokenServices.deleteAllSessions(user);
+        return result;
+    }
+
     async updateUserById(user) {
         const updatedUser = await UserModel.findByIdAndUpdate(user._id, user, {
             new: true,
