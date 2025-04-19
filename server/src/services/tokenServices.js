@@ -15,16 +15,26 @@ class TokenServices {
         };
     }
 
-    async saveToken(userId, refreshToken) {
+    async saveToken(userId, refreshToken, sessionId) {
         // сохраняем токен в бд
-        const tokenData = await TokenModel.findOne({ user: userId });
-        if (tokenData) {
-            tokenData.refreshToken = refreshToken; // здесь  логику можно чуть подправить, чтобы не выкидывало из аккаунта, если зайти с другого устройства
-            return tokenData.save();
+        const userSessions = await TokenModel.find({ user: userId });
+        if (userSessions.length >= 5) {
+            await TokenModel.deleteOne({ user: userId });
+        }
+        const existingSession = await TokenModel.findOne({
+            user: userId,
+            sessionId: sessionId,
+        });
+        if (existingSession) {
+            existingSession.refreshToken = refreshToken;
+            existingSession.expiresIn = new Date(Date.now() + 2.592e9); // 30 дней
+            return await existingSession.save();
         }
         const token = await TokenModel.create({
             user: userId,
+            sessionId,
             refreshToken,
+            expiresIn: new Date(Date.now() + 2.592e9),
         });
         return token;
     }

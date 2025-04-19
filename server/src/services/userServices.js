@@ -19,6 +19,7 @@ class UserServices {
 
         const passwordHash = await bcrypt.hash(password, 10);
         const activationLink = uuidv4();
+        const sessionId = uuidv4();
 
         const createdUser = await UserModel.create({
             email,
@@ -35,7 +36,11 @@ class UserServices {
 
         const userDto = new UserDto(createdUser); // создаем экземпляр payload для генерации токена
         const tokens = TokenServices.generateTokens({ ...userDto }); //передаем обычный объект, а не instance UserDto
-        await tokenServices.saveToken(userDto.id, tokens.refreshToken);
+        await tokenServices.saveToken(
+            userDto.id,
+            tokens.refreshToken,
+            sessionId,
+        );
 
         return {
             ...tokens,
@@ -61,9 +66,14 @@ class UserServices {
         if (!isEqualPass) {
             throw ApiError.BadRequestError('invalid login or password');
         }
+        const sessionId = uuidv4();
         const userDto = new UserDto(user);
         const tokens = TokenServices.generateTokens({ ...userDto });
-        await tokenServices.saveToken(userDto.id, tokens.refreshToken);
+        await tokenServices.saveToken(
+            userDto.id,
+            tokens.refreshToken,
+            sessionId,
+        );
 
         await mailServices.sendNotificationEmail(email, user.username);
 
