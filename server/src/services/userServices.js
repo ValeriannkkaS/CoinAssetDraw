@@ -35,7 +35,10 @@ class UserServices {
         );
 
         const userDto = new UserDto(createdUser); // создаем экземпляр payload для генерации токена
-        const tokens = TokenServices.generateTokens({ ...userDto }); //передаем обычный объект, а не instance UserDto
+        const tokens = TokenServices.generateTokens({
+            sessionId,
+            ...userDto,
+        }); //передаем обычный объект, а не instance UserDto
         await tokenServices.saveToken(
             userDto.id,
             tokens.refreshToken,
@@ -68,7 +71,10 @@ class UserServices {
         }
         const sessionId = uuidv4();
         const userDto = new UserDto(user);
-        const tokens = TokenServices.generateTokens({ ...userDto });
+        const tokens = TokenServices.generateTokens({
+            sessionId,
+            ...userDto,
+        });
         await tokenServices.saveToken(
             userDto.id,
             tokens.refreshToken,
@@ -92,6 +98,34 @@ class UserServices {
         const user = await TokenServices.getIdByRefreshToken(refreshToken);
         const result = await TokenServices.deleteAllSessions(user);
         return result;
+    }
+
+    async refresh(refreshToken) {
+        if (!refreshToken) {
+            throw ApiError.UnauthorizedError('Unauthorized');
+        }
+        const userData = TokenServices.validateRefreshToken(refreshToken);
+        const userSession = TokenServices.findSession(refreshToken);
+        if (!userSession || !userData) {
+            throw ApiError.UnauthorizedError('Unauthorized');
+        }
+        const user = await UserModel.findOne({ _id: userData.id });
+        const userDto = new UserDto(user);
+        const sessionId = uuidv4();
+        const tokens = TokenServices.generateTokens({
+            sessionId,
+            ...userDto,
+        });
+        await tokenServices.saveToken(
+            userDto.id,
+            tokens.refreshToken,
+            sessionId,
+        );
+        await tokenServices.deleteSession(refreshToken);
+        return {
+            ...tokens,
+            user: userDto,
+        };
     }
 
     async updateUserById(user) {

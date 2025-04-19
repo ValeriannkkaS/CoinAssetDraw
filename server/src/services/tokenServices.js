@@ -16,6 +16,24 @@ class TokenServices {
         };
     }
 
+    validateAccessToken(token) {
+        try {
+            const userData = jwt.verify(token, process.env.JWT_ACCESS_SECRET);
+            return userData;
+        } catch (err) {
+            return null;
+        }
+    }
+
+    validateRefreshToken(token) {
+        try {
+            const userData = jwt.verify(token, process.env.JWT_REFRESH_SECRET);
+            return userData;
+        } catch (err) {
+            return null;
+        }
+    }
+
     async saveToken(userId, refreshToken, sessionId) {
         // сохраняем токен в бд
         const userSessions = await TokenModel.find({ user: userId });
@@ -73,6 +91,16 @@ class TokenServices {
         }
         await TokenModel.deleteMany({ user: user });
         return { message: 'All refresh tokens has been deleted.' };
+    }
+
+    async findSession(refreshToken) {
+        const userSession = await TokenModel.findOne({
+            refreshToken: refreshToken,
+        });
+        if (!userSession) {
+            return null;
+        }
+        return userSession;
     }
 }
 
