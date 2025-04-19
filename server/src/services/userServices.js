@@ -26,15 +26,11 @@ class UserServices {
             activationLink,
             portfolios: [],
         });
-        try {
-            await mailServices.sendActivationEmail(
-                email,
-                username,
-                `${process.env.API_URL}/api/users/activate/${activationLink}`,
-            );
-        } catch (err) {
-            console.log(err);
-        }
+        await mailServices.sendActivationEmail(
+            email,
+            username,
+            `${process.env.API_URL}/api/users/activate/${activationLink}`,
+        );
 
         const userDto = new UserDto(createdUser); // создаем экземпляр payload для генерации токена
         const tokens = TokenServices.generateTokens({ ...userDto }); //передаем обычный объект, а не instance UserDto
@@ -44,6 +40,15 @@ class UserServices {
             ...tokens,
             user: userDto,
         };
+    }
+
+    async activate(activationLink) {
+        const user = await UserModel.findOne({ activationLink });
+        if (!user) {
+            throw new Error('your link is invalid');
+        }
+        user.isActivated = true;
+        await user.save();
     }
 
     async login(user) {

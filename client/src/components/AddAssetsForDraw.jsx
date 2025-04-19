@@ -12,7 +12,7 @@ import {
 } from 'antd';
 import { useCryptoContext } from '../context/CryptoContext.jsx';
 import CoinImageDescription from './CoinImageDescription.jsx';
-import { dateToString } from '../utils.js';
+import { dateToString } from '../utils/utils.js';
 import { getPriceByTime } from '../fetch.js';
 import PropTypes from 'prop-types';
 

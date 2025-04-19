@@ -1,6 +1,6 @@
 import { createContext, useEffect, useState, useContext } from 'react';
 import { fakeFetchAssets, fakeFetchCrypto } from '../api.js';
-import { calculateAveragePrice, percentDiffCounter } from '../utils.js';
+import { calculateAveragePrice, percentDiffCounter } from '../utils/utils.js';
 import { PropTypes } from 'prop-types';
 
 const CryptoContext = createContext({

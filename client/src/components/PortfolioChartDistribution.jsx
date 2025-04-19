@@ -1,7 +1,7 @@
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import { Doughnut } from 'react-chartjs-2';
 import { useCryptoContext } from '../context/CryptoContext.jsx';
-import { capitalize } from '../utils.js';
+import { capitalize } from '../utils/utils.js';
 import CardForMainCharts from './CardForMainCharts.jsx';
 
 ChartJS.register(ArcElement, Tooltip, Legend);

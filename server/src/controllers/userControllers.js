@@ -41,7 +41,12 @@ class UserController {
 
     async activate(req, res, next) {
         try {
-        } catch (err) {}
+            const activationLink = req.params.link;
+            await UserServices.activate(activationLink);
+            return res.redirect(process.env.CLIENT_URL); //потом можно сделать отдельную страничку с показом успешного подтверждения
+        } catch (err) {
+            res.status(500).json(err.message);
+        }
     }
 
     async updateUserById(req, res) {

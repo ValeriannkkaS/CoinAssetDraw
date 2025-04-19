@@ -9,7 +9,7 @@ import {
     Popover,
 } from 'antd';
 import { ArrowUpOutlined, ArrowDownOutlined } from '@ant-design/icons';
-import { capitalize } from '../utils.js';
+import { capitalize } from '../utils/utils.js';
 import { useCryptoContext } from '../context/CryptoContext.jsx';
 import { useThemeContext } from '../context/ThemeContext.jsx';
 import { useState } from 'react';
