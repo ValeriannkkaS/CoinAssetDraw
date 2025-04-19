@@ -31,10 +31,14 @@ class UserController {
     }
 
     async login(req, res, next) {
-        //////пока что просто проставка
         try {
-            const user = await UserServices.login(req.body);
-            res.status(200).json(user);
+            const { email, password } = req.body;
+            const userData = await UserServices.login(email, password);
+            res.cookie('refreshToken', userData.refreshToken, {
+                maxAge: 2.592e9, // 30 дней
+                httpOnly: true,
+            });
+            return res.status(200).json(userData);
         } catch (err) {
             next(err);
         }

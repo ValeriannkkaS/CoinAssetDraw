@@ -16,7 +16,6 @@ class MailServices {
     }
 
     async sendActivationEmail(to, username, link) {
-        console.log(link);
         await this.transporter.sendMail({
             from: process.env.SMTP_USER,
             to,
@@ -107,6 +106,114 @@ class MailServices {
 </body>
 </html>
                 `,
+        });
+    }
+
+    async sendNotificationEmail(to, username) {
+        await this.transporter.sendMail({
+            from: process.env.SMTP_USER,
+            to,
+            subject: 'Activation account by email on' + process.env.API,
+            text: '',
+            html: `
+            <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>New Login Alert</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f4;
+      font-family: 'Segoe UI', sans-serif;
+    }
+    .email-container {
+      max-width: 600px;
+      margin: 30px auto;
+      background-color: #ffffff;
+      border-radius: 12px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+    }
+    .email-header {
+      background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+      padding: 30px;
+      text-align: center;
+      color: white;
+    }
+    .email-header h1 {
+      margin: 0;
+      font-size: 26px;
+    }
+    .email-body {
+      padding: 30px;
+      color: #333;
+    }
+    .email-body h2 {
+      margin-top: 0;
+    }
+    .email-body p {
+      line-height: 1.6;
+    }
+    .details-box {
+      background-color: #f0f4ff;
+      padding: 16px;
+      border-left: 4px solid #2575fc;
+      border-radius: 6px;
+      margin-top: 20px;
+      font-size: 15px;
+    }
+    .button {
+      display: inline-block;
+      margin-top: 25px;
+      padding: 12px 24px;
+      background-color: #2575fc;
+      color: white;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: bold;
+      box-shadow: 0 4px 12px rgba(37, 117, 252, 0.4);
+      transition: background 0.3s ease;
+    }
+    .button:hover {
+      background-color: #1a5ed8;
+    }
+    .email-footer {
+      text-align: center;
+      padding: 20px;
+      font-size: 13px;
+      color: #888;
+    }
+  </style>
+</head>
+<body>
+  <div class="email-container">
+    <div class="email-header">
+      <h1>New Login to Your Account</h1>
+    </div>
+    <div class="email-body">
+      <h2>Hello, ${username}!</h2>
+      <p>We noticed a new sign-in to your account. Here are the details:</p>
+      <div class="details-box">
+        <p><strong>Date:</strong> ${new Date().toLocaleDateString()}</p>
+        <p><strong>Time:</strong> ${new Date().toLocaleTimeString()}</p>
+        <p><strong>Location:</strong> Moscow, Russia</p> <!--пока так, в дальнейшем буду брать информацию из данных с фронта-->
+        <p><strong>Device:</strong> Windows · Chrome Browser</p>
+        <p><strong>IP Address:</strong> 192.168.1.123</p>
+      </div>
+      <p>If this was you, no further action is required.</p>
+      <p>If you did not authorize this login, please secure your account immediately:</p>
+    </div>
+    <div class="email-footer">
+      © 2025 CoinAssetDraw. All rights reserved.<br>
+      <a href="https://yourwebsite.com" style="color: #888;">Visit our website</a>
+    </div>
+  </div>
+</body>
+</html>
+            `,
         });
     }
 }

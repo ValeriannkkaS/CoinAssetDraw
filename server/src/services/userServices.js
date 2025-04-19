@@ -52,10 +52,25 @@ class UserServices {
         await user.save();
     }
 
-    async login(user) {
-        //////пока что просто проставка
-        const registeredUser = await UserModel.create(user);
-        return registeredUser;
+    async login(email, password) {
+        const user = await UserModel.findOne({ email });
+        if (!user) {
+            throw ApiError.BadRequestError('User not found');
+        }
+        const isEqualPass = await bcrypt.compare(password, user.password);
+        if (!isEqualPass) {
+            throw ApiError.BadRequestError('invalid login or password');
+        }
+        const userDto = new UserDto(user);
+        const tokens = TokenServices.generateTokens({ ...userDto });
+        await tokenServices.saveToken(userDto.id, tokens.refreshToken);
+
+        await mailServices.sendNotificationEmail(email, user.username);
+
+        return {
+            ...tokens,
+            user: userDto,
+        };
     }
 
     async updateUserById(user) {
