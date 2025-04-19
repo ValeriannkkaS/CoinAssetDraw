@@ -7,6 +7,7 @@ const UserShema = new mongoose.Schema({
     username: { type: String, required: true, unique: true },
     isActivated: { type: Boolean, default: false },
     activationLink: { type: String },
+    role: { type: String, enum: ['admin', 'user'], default: 'user' },
     portfolios: [PortfolioSchema],
 });
 

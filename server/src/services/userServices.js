@@ -26,6 +26,7 @@ class UserServices {
             username,
             password: passwordHash,
             activationLink,
+            role: 'user',
             portfolios: [],
         });
         await mailServices.sendActivationEmail(
@@ -71,6 +72,7 @@ class UserServices {
         }
         const sessionId = uuidv4();
         const userDto = new UserDto(user);
+        console.log(user.role);
         const tokens = TokenServices.generateTokens({
             sessionId,
             ...userDto,

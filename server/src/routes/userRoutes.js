@@ -2,6 +2,7 @@ import Router from 'express';
 import { body } from 'express-validator';
 import UserController from '../controllers/userControllers.js';
 import { authMiddleware } from '../middlewares/auth-middleware.js';
+import { roleMiddleware } from '../middlewares/role-middleware.js';
 
 const userRouter = Router();
 
@@ -16,9 +17,24 @@ userRouter.post('/auth/logout', UserController.logout);
 userRouter.post('/auth/logout-all', UserController.logoutAll);
 userRouter.get('/activate/:link', UserController.activate);
 userRouter.get('/refresh', UserController.refresh);
-userRouter.get('/', authMiddleware, UserController.getAllUsers);
-userRouter.get('/:id', UserController.getUserById);
-userRouter.put('/', UserController.updateUserById);
-userRouter.delete('/:id', UserController.deleteUserById);
+userRouter.get(
+    '/',
+    authMiddleware,
+    roleMiddleware(['admin']),
+    UserController.getAllUsers,
+);
+userRouter.get(
+    '/:id',
+    authMiddleware,
+    roleMiddleware(['admin']),
+    UserController.getUserById,
+);
+userRouter.put('/', authMiddleware, UserController.updateUserById);
+userRouter.delete(
+    '/:id',
+    authMiddleware,
+    roleMiddleware(['admin']),
+    UserController.deleteUserById,
+);
 
 export default userRouter;
