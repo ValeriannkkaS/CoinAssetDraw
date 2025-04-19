@@ -15,7 +15,7 @@ class UserController {
             });
             return res.status(200).json(userData);
         } catch (err) {
-            res.status(500).json(err.message);
+            next(err);
         }
     }
 
@@ -25,18 +25,22 @@ class UserController {
             const user = await UserServices.login(req.body);
             res.status(200).json(user);
         } catch (err) {
-            res.status(500).json({ err });
+            next(err);
         }
     }
 
     async logout(req, res, next) {
         try {
-        } catch (err) {}
+        } catch (err) {
+            next(err);
+        }
     }
 
     async refresh(req, res, next) {
         try {
-        } catch (err) {}
+        } catch (err) {
+            next(err);
+        }
     }
 
     async activate(req, res, next) {
@@ -45,45 +49,45 @@ class UserController {
             await UserServices.activate(activationLink);
             return res.redirect(process.env.CLIENT_URL); //потом можно сделать отдельную страничку с показом успешного подтверждения
         } catch (err) {
-            res.status(500).json(err.message);
+            next(err);
         }
     }
 
-    async updateUserById(req, res) {
+    async updateUserById(req, res, next) {
         try {
             const updatedUser = await UserServices.updateUserById(req.body);
             return res.status(200).json(updatedUser);
         } catch (err) {
-            res.status(500).json(err.message);
+            next(err);
         }
     }
 
-    async getAllUsers(req, res) {
+    async getAllUsers(req, res, next) {
         try {
             const users = await UserServices.getAllUsers();
             return res.status(200).json(users);
         } catch (err) {
-            res.status(500).json({ err });
+            next(err);
         }
     }
 
-    async getUserById(req, res) {
+    async getUserById(req, res, next) {
         try {
             const user = await UserServices.getUserById(req.params.id);
             return res.status(200).json(user);
         } catch (err) {
-            res.status(500).json({ err });
+            next(err);
         }
     }
 
-    async deleteUserById(req, res) {
+    async deleteUserById(req, res, next) {
         try {
             const deletedUser = await UserServices.deleteUserById(
                 req.params.id,
             );
             return res.status(200).json(deletedUser);
         } catch (err) {
-            res.status(500).json({ err });
+            next(err);
         }
     }
 }

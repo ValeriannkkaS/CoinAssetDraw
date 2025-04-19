@@ -4,6 +4,7 @@ import cors from 'cors';
 import cookieParser from 'cookie-parser';
 import { connectDB } from './src/config/mongodb.js';
 import userRouter from './src/routes/userRoutes.js';
+import { errorMiddleware } from './src/middlewares/error-middleware.js';
 
 dotenv.config();
 
@@ -13,8 +14,8 @@ const app = express();
 app.use(express.json());
 app.use(cookieParser());
 app.use(cors());
-
 app.use('/api/users', userRouter);
+app.use(errorMiddleware);
 
 async function main() {
     try {

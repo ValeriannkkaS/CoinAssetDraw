@@ -5,13 +5,14 @@ import mailServices from './mailServices.js';
 import TokenServices from './tokenServices.js';
 import { UserDto } from '../dtos/user.dto.js';
 import tokenServices from './tokenServices.js';
+import ApiError from '../exceptions/api-error.js';
 
 class UserServices {
     async registration(email, password, username) {
         const candidate = await UserModel.findOne({ email });
 
         if (candidate) {
-            throw new Error(
+            throw ApiError.BadRequestError(
                 `A user with ${email} e-mail address already exists`,
             );
         }
@@ -45,7 +46,7 @@ class UserServices {
     async activate(activationLink) {
         const user = await UserModel.findOne({ activationLink });
         if (!user) {
-            throw new Error('your link is invalid');
+            throw ApiError.BadRequestError('your link is invalid');
         }
         user.isActivated = true;
         await user.save();
