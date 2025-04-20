@@ -9,10 +9,6 @@ export default function ConfigProviderForElements({ children }) {
         <ConfigProvider
             theme={{
                 components: {
-                    Button: {
-                        colorPrimary: theme.buttons.primary.background,
-                        algorithm: true, // Enable algorithm
-                    },
                     Card: {
                         colorTextDescription: theme.cards.text,
                         colorBgContainer: theme.cards.background,

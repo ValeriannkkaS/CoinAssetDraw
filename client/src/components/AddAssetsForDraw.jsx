@@ -15,6 +15,9 @@ import CoinImageDescription from './CoinImageDescription.jsx';
 import { dateToString } from '../utils/utils.js';
 import { getPriceByTime } from '../fetch.js';
 import PropTypes from 'prop-types';
+import { GradientButton } from './Buttons/GradientButton.jsx';
+import { ConfirmButton } from './Buttons/ConfirmButton.jsx';
+import { CancelButton } from './Buttons/CancelButton.jsx';
 
 const validateMessages = {
     required: '${label} is required',
@@ -44,7 +47,7 @@ export default function AddAssetsForDraw({ onClose }) {
                 title="Successfully Added new Asset"
                 subTitle={`Added ${assetRef.current.amount} of ${coin.name} by price ${assetRef.current.price}`}
                 extra={[
-                    <Button
+                    <GradientButton
                         type="primary"
                         key="console"
                         onClick={() => {
@@ -54,8 +57,8 @@ export default function AddAssetsForDraw({ onClose }) {
                         }}
                     >
                         Go Back
-                    </Button>,
-                    <Button
+                    </GradientButton>,
+                    <ConfirmButton
                         key="buy"
                         onClick={() => {
                             setResult(false);
@@ -63,7 +66,7 @@ export default function AddAssetsForDraw({ onClose }) {
                         }}
                     >
                         Buy Again
-                    </Button>,
+                    </ConfirmButton>,
                 ]}
             />
         );
@@ -147,9 +150,9 @@ export default function AddAssetsForDraw({ onClose }) {
             <Flex align="center">
                 <CoinImageDescription coin={coin} />
                 {/*элемент иконка монеты + название*/}
-                <Button size="large" onClick={() => setCoin(null)}>
+                <CancelButton size="large" onClick={() => setCoin(null)}>
                     Return
-                </Button>
+                </CancelButton>
             </Flex>
             <Divider />
             <Form
@@ -228,9 +231,9 @@ export default function AddAssetsForDraw({ onClose }) {
                 </Form.Item>
 
                 <Form.Item>
-                    <Button type="primary" htmlType="submit">
+                    <ConfirmButton type="primary" htmlType="submit">
                         Add Asset
-                    </Button>
+                    </ConfirmButton>
                 </Form.Item>
             </Form>
         </>

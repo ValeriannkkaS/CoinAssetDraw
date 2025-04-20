@@ -8,6 +8,8 @@ import {
     Switch,
     Flex,
     Popover,
+    Badge,
+    Avatar,
 } from 'antd';
 import { SunOutlined, MoonOutlined, UserOutlined } from '@ant-design/icons';
 import { useCryptoContext } from '../context/CryptoContext.jsx';
@@ -16,6 +18,8 @@ import CoinInfoModal from '../components/CoinInfoModal.jsx';
 import AddAssetsForDraw from '../components/AddAssetsForDraw.jsx';
 import { useThemeContext } from '../context/ThemeContext.jsx';
 import { darkTheme, lightTheme } from '../lightVsDarkTheme.js';
+import { GradientButton } from '../components/Buttons/GradientButton.jsx';
+import { GradientAvatar } from '../components/Avatar.jsx';
 
 const headerStyle = {
     width: '100%',
@@ -142,9 +146,6 @@ export default function AppHeader() {
                 <AddAssetsForDraw onClose={() => setDrawer(false)} />
             </Drawer>
             <Flex align="center" gap={20}>
-                <Popover title={'user info'} content={contentForPopover}>
-                    <UserOutlined />
-                </Popover>
                 <Switch
                     checkedChildren={<SunOutlined />}
                     unCheckedChildren={<MoonOutlined />}
@@ -152,9 +153,17 @@ export default function AppHeader() {
                         toggleTheme();
                     }}
                 />
-                <Button type="primary" onClick={() => setDrawer(true)}>
+                <GradientButton type="primary" onClick={() => setDrawer(true)}>
                     {'Add Asset'}
-                </Button>
+                </GradientButton>
+                <Popover title={'user info'} content={contentForPopover}>
+                    <Badge>
+                        <GradientAvatar
+                            icon={<UserOutlined />}
+                            shape="square"
+                        />
+                    </Badge>
+                </Popover>
             </Flex>
         </Layout.Header>
     );

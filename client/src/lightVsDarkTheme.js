@@ -37,7 +37,7 @@ export const lightTheme = {
 
     buttons: {
         primary: {
-            background: '#007BFF',
+            background: '#2575fc',
             text: '#FFFFFF',
             hover: '#0056b3',
         },

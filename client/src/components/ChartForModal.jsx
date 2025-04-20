@@ -15,6 +15,7 @@ import {
 } from 'chart.js';
 import { Line } from 'react-chartjs-2';
 import { useEffect, useState, useRef } from 'react';
+import { GradientButton } from './Buttons/GradientButton.jsx';
 
 const ContainerForChart = styled.div`
     width: 100%;
@@ -80,13 +81,13 @@ export default function ChartForModal({ coin }) {
                     status="warning"
                     title="No luck uploading the information."
                     extra={
-                        <Button
+                        <GradientButton
                             type="primary"
                             key="console"
                             onClick={() => changeError(false)}
                         >
                             Try again
-                        </Button>
+                        </GradientButton>
                     }
                 />
             </ContainerForChart>
