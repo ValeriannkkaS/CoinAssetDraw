@@ -91,6 +91,15 @@ export const lightTheme = {
         foreground: '#000000',
         border: '#DDD',
     },
+
+    menu: {
+        colorItemText: '#1F2937',
+        colorItemTextHover: '#2563EB',
+        colorItemTextSelected: '#1D4ED8',
+        colorBgContainer: '#FFFFFF',
+        colorBgMenuItemHover: '#F3F4F6',
+        colorBgMenuItemSelected: '#E0E7FF',
+    },
 };
 
 export const darkTheme = {
@@ -186,5 +195,14 @@ export const darkTheme = {
         background: '#2B2B2B',
         foreground: '#FFFFFF',
         border: '#555',
+    },
+
+    menu: {
+        colorItemText: '#D1D5DB',
+        colorItemTextHover: '#10B981',
+        colorItemTextSelected: '#34D399',
+        colorBgContainer: '#1F2937',
+        colorBgMenuItemHover: '#374151',
+        colorBgMenuItemSelected: '#4B5563',
     },
 };

@@ -72,6 +72,22 @@ export default function ConfigProviderForElements({ children }) {
                         colorTextPlaceholder: theme.form.inputPlaceholder,
                         colorText: theme.form.inputText,
                     },
+                    Popover: {
+                        colorText: theme.cards.text,
+                        colorTextHeading: theme.cards.text,
+                        colorBgElevated: theme.menu.colorBgContainer,
+                        colorBorderSecondary: theme.cards.border,
+                    },
+                    Menu: {
+                        colorItemText: theme.menu.colorItemText,
+                        colorItemTextHover: theme.menu.colorItemTextHover,
+                        colorItemTextSelected: theme.menu.colorItemTextSelected,
+                        colorBgContainer: theme.menu.colorBgContainer,
+                        colorBgMenuItemSelected:
+                            theme.menu.colorBgMenuItemSelected,
+                        colorBgMenuItemHover: theme.menu.colorBgMenuItemHover,
+                        itemHeight: 48,
+                    },
                 },
             }}
         >

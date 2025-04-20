@@ -2,16 +2,13 @@ import {
     Layout,
     Select,
     Space,
-    Button,
     Modal,
     Drawer,
-    Switch,
     Flex,
     Popover,
     Badge,
-    Avatar,
 } from 'antd';
-import { SunOutlined, MoonOutlined, UserOutlined } from '@ant-design/icons';
+import { UserOutlined } from '@ant-design/icons';
 import { useCryptoContext } from '../context/CryptoContext.jsx';
 import { useState, useEffect } from 'react';
 import CoinInfoModal from '../components/CoinInfoModal.jsx';
@@ -20,6 +17,7 @@ import { useThemeContext } from '../context/ThemeContext.jsx';
 import { darkTheme, lightTheme } from '../lightVsDarkTheme.js';
 import { GradientButton } from '../components/Buttons/GradientButton.jsx';
 import { GradientAvatar } from '../components/Avatar.jsx';
+import UserInfoForPopover from '../components/UserInfoForPopover.jsx';
 import ThemeToggleButton from '../components/Buttons/ThemeToggleButton.jsx';
 
 const headerStyle = {
@@ -31,13 +29,6 @@ const headerStyle = {
     justifyContent: 'space-between',
     alignItems: 'center',
 };
-const contentForPopover = (
-    <>
-        <div>1</div>
-        <div>2</div>
-        <div>3</div>
-    </>
-);
 
 export default function AppHeader() {
     const [select, setSelect] = useState(false);
@@ -154,7 +145,7 @@ export default function AppHeader() {
                 <GradientButton type="primary" onClick={() => setDrawer(true)}>
                     {'Add Asset'}
                 </GradientButton>
-                <Popover title={'user info'} content={contentForPopover}>
+                <Popover trigger="click" content={<UserInfoForPopover />}>
                     <Badge>
                         <GradientAvatar
                             icon={<UserOutlined />}
