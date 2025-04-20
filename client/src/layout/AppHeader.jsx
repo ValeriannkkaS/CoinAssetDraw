@@ -20,6 +20,7 @@ import { useThemeContext } from '../context/ThemeContext.jsx';
 import { darkTheme, lightTheme } from '../lightVsDarkTheme.js';
 import { GradientButton } from '../components/Buttons/GradientButton.jsx';
 import { GradientAvatar } from '../components/Avatar.jsx';
+import ThemeToggleButton from '../components/Buttons/ThemeToggleButton.jsx';
 
 const headerStyle = {
     width: '100%',
@@ -146,12 +147,9 @@ export default function AppHeader() {
                 <AddAssetsForDraw onClose={() => setDrawer(false)} />
             </Drawer>
             <Flex align="center" gap={20}>
-                <Switch
-                    checkedChildren={<SunOutlined />}
-                    unCheckedChildren={<MoonOutlined />}
-                    onChange={() => {
-                        toggleTheme();
-                    }}
+                <ThemeToggleButton
+                    isDark={theme === lightTheme}
+                    toggleTheme={toggleTheme}
                 />
                 <GradientButton type="primary" onClick={() => setDrawer(true)}>
                     {'Add Asset'}
