@@ -1,6 +1,6 @@
 import { Badge, Flex, Typography, Divider, Menu, Avatar } from 'antd';
 import { GradientAvatar } from './Avatar.jsx';
-import { useState } from 'react';
+import AuthModal from './AuthModal/indexModal.jsx';
 import {
     UserOutlined,
     NotificationOutlined,
@@ -8,13 +8,14 @@ import {
     SettingOutlined,
     MailOutlined,
     LogoutOutlined,
+    LoginOutlined,
 } from '@ant-design/icons';
-import { MailIcon } from 'lucide-react';
+import { authModalStore } from '../stores/authModalStore.js';
 
 export default function UserInfoForPopover() {
     const items = [
         {
-            key: '3',
+            key: 'settings',
             icon: (
                 <Badge>
                     <Avatar icon={<SettingOutlined />} shape="square" />
@@ -30,7 +31,12 @@ export default function UserInfoForPopover() {
                     <Avatar icon={<MailOutlined />} shape="square" />
                 </Badge>
             ),
-            children: [{ key: '5', label: 'Confirm your email' }],
+            children: [
+                {
+                    key: 'tooltip-for-confirm-email',
+                    label: 'Confirm your email',
+                },
+            ],
         },
         {
             key: 'sub2',
@@ -47,8 +53,27 @@ export default function UserInfoForPopover() {
                 </Badge>
             ),
             children: [
-                { key: '9', label: 'Log out' },
-                { key: '10', label: 'Log out of all devices' },
+                { key: 'log-out', label: 'Log out' },
+                { key: 'log-out-all', label: 'Log out of all devices' },
+            ],
+        },
+        {
+            key: 'sub3',
+            label: 'Login',
+            icon: (
+                <Badge>
+                    <Avatar
+                        style={{
+                            backgroundColor: '#004524',
+                        }}
+                        icon={<LoginOutlined />}
+                        shape="square"
+                    />
+                </Badge>
+            ),
+            children: [
+                { key: 'sign-in', label: 'Sign in' },
+                { key: 'sign-up', label: 'Sign up' },
             ],
         },
     ];
@@ -70,13 +95,44 @@ export default function UserInfoForPopover() {
                     />
                 </Badge>
             </Flex>
-            <Divider textPaddingInline={0} />
+            <hr />
             <div
                 style={{
                     width: '100%',
                 }}
             >
-                <Menu mode="inline" items={items} />
+                <Menu
+                    mode="inline"
+                    items={items}
+                    onClick={({ key }) => {
+                        switch (key) {
+                            case 'settings':
+                                break;
+
+                            case 'sub1':
+                                break;
+                            case 'mail-confirmation':
+                                break;
+
+                            case 'sub2':
+                                break;
+                            case 'log-out':
+                                break;
+                            case 'log-out-all':
+                                break;
+
+                            case 'sub3':
+                                break;
+                            case 'sign-in':
+                                authModalStore.openModal('signIn');
+                                break;
+                            case 'sign-up':
+                                authModalStore.openModal('signUp');
+                                break;
+                        }
+                    }}
+                />
+                <AuthModal />
             </div>
         </>
     );

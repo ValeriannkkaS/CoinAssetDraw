@@ -14,5 +14,8 @@
   "devDependencies": {
     "concurrently": "^9.1.2",
     "prettier": "^3.5.3"
+  },
+  "dependencies": {
+    "mobx": "^6.13.7"
   }
 }
