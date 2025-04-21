@@ -15,6 +15,7 @@ import { useThemeContext } from '../context/ThemeContext.jsx';
 import { useState } from 'react';
 import AssetInfoModal from '../components/AssetInfoModal.jsx';
 import StyledModal from '../components/StyledModal.jsx';
+import StyledCard from '../components/StyledCard.jsx';
 
 const siderStyle = {
     padding: '0.5rem',
@@ -46,10 +47,10 @@ export default function AppSider() {
                     content={'about your purchases of ' + capitalize(asset.id)}
                     title="Click to see more detailed information"
                 >
-                    <Card
+                    <StyledCard
                         key={asset.id}
-                        style={{ marginBottom: '1rem' }}
                         hoverable
+                        style={{ marginBottom: '1rem' }}
                         onClick={() => {
                             setModal(true);
                             setCoin(
@@ -118,7 +119,7 @@ export default function AppSider() {
                                 </List.Item>
                             )}
                         />
-                    </Card>
+                    </StyledCard>
                 </Popover>
             ))}
             <StyledModal

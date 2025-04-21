@@ -20,12 +20,14 @@ export const lightTheme = {
     },
 
     cards: {
-        background: '#FFFFFF',
+        background: 'linear-gradient(to bottom right, #ffffff, #f8fafc)',
         shadow: 'rgba(0, 0, 0, 0.07)',
-        border: '#E0E4EA',
+        border: '#e2e8f0',
+        boxShadow: '0 2px 8px rgba(99, 99, 99, 0.1)',
         positiveText: '#2BAA66',
         negativeText: '#E14D4D',
-        text: '#2C3E50',
+        title: '#334155',
+        text: '#475569',
     },
 
     slidingSidebar: {
@@ -125,12 +127,13 @@ export const darkTheme = {
     },
 
     cards: {
-        background: '#262626',
-        shadow: 'rgba(255, 255, 255, 0.03)',
-        border: '#3F464D',
+        background: 'linear-gradient(to bottom right, #1e293b, #0f172a)',
+        shadow: '0 4px 12px rgba(0, 0, 0, 0.25)',
+        border: '#334155',
         positiveText: '#3DDC84',
         negativeText: '#FF7676',
-        text: '#f5f5f5',
+        text: '#cbd5e1',
+        title: '#f8fafc',
     },
 
     slidingSidebar: {

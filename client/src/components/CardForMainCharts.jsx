@@ -1,36 +1,53 @@
-import { Typography } from 'antd';
+import styled from 'styled-components';
+import { Card, Typography } from 'antd';
 import { useThemeContext } from '../context/ThemeContext.jsx';
+
+const ChartStyledCard = styled(Card)`
+    &.ant-card {
+        background: ${({ theme }) => theme.cards.background};
+        border: 1px solid ${({ theme }) => theme.cards.border};
+        box-shadow: ${({ theme }) => theme.cards.boxShadow};
+        color: ${({ theme }) => theme.cards.text};
+        border-radius: 16px;
+        padding: 1rem 1.5rem;
+    }
+
+    .ant-card-head {
+        background: transparent;
+        border-bottom: none;
+    }
+
+    .ant-card-head-title {
+        color: ${({ theme }) => theme.cards.title};
+        font-weight: 600;
+    }
+
+    .ant-card-body {
+        padding: 0.5rem;
+        height: 50vh;
+    }
+`;
 
 export default function CardForMainCharts({ children, title, centered }) {
     const { theme } = useThemeContext();
 
     return (
-        <div
-            style={{
-                display: 'flex',
-                padding: '0.5rem',
-                flexDirection: 'column',
-                alignItems: 'center',
-                justifyContent: 'center',
-                marginBottom: '1rem',
-                width: centered ? '100%' : '50%',
-                borderRadius: '1rem',
-                border: '1px solid ',
-                borderColor: theme.cards.border,
-                backgroundColor: theme.cards.background,
-            }}
+        <ChartStyledCard
+            style={{ width: centered ? '100%' : '50%', marginBottom: '1rem' }}
+            theme={theme}
+            title={
+                <Typography.Title
+                    level={4}
+                    style={{
+                        margin: 0,
+                        textAlign: centered ? 'center' : 'left',
+                    }}
+                >
+                    {title}
+                </Typography.Title>
+            }
         >
-            <Typography.Title level={3}>{title}</Typography.Title>
-            <div
-                style={{
-                    height: '50vh',
-                    width: '100%',
-                    position: 'relative',
-                    margin: '0 auto',
-                }}
-            >
-                {children}
-            </div>
-        </div>
+            {children}
+        </ChartStyledCard>
     );
 }
