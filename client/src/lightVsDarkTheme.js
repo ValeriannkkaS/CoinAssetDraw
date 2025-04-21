@@ -5,23 +5,22 @@ export const lightTheme = {
     header: {
         background: '#FFFFFF',
         text: '#2C3E50',
-        border: '#D1D5DB',
+        border: '#e2e8f0',
     },
 
     sidebar: {
-        background: '#F4F5F7',
+        background: '#f8fafc',
         text: '#2C3E50',
-        border: '#D1D5DB',
+        border: '#e2e8f0',
         scrollbar: '#2c3e50 white',
     },
     content: {
-        background: '#f0f0f0',
+        background: '#ffffff',
         text: '#1f1f1f',
     },
 
     cards: {
         background: 'linear-gradient(to bottom right, #ffffff, #f8fafc)',
-        shadow: 'rgba(0, 0, 0, 0.07)',
         border: '#e2e8f0',
         boxShadow: '0 2px 8px rgba(99, 99, 99, 0.1)',
         positiveText: '#2BAA66',
@@ -64,6 +63,15 @@ export const lightTheme = {
         text: '#334155',
     },
 
+    drawer: {
+        background: 'linear-gradient(to bottom right, #ffffff, #f8fafc)',
+        boxShadow: '-4px 0 12px rgba(0, 0, 0, 0.05)',
+        borderLeft: '1px solid #e2e8f0',
+        headerBorder: '1px solid #e2e8f0',
+        title: '#334155',
+        text: '#ffffff',
+    },
+
     table: {
         headerBackground: '#E3EAFD',
         headerText: '#222',
@@ -85,7 +93,7 @@ export const lightTheme = {
     footer: {
         background: '#FFFFFF',
         text: '#333',
-        border: '#DDD',
+        border: '#e2e8f0',
     },
 
     qrCode: {
@@ -109,20 +117,20 @@ export const darkTheme = {
     text: '#EAEAEA',
 
     header: {
-        background: '#1F2224',
+        background: '#1e293b',
         text: '#D3D7DE',
-        border: '#3E444B',
+        border: '#334155',
     },
 
     sidebar: {
-        background: '#22262A',
+        background: '#1e293b',
         text: '#D3D7DE',
-        border: '#3E444B',
+        border: '#334155',
         scrollbar: 'white #2a2f34',
     },
 
     content: {
-        background: '#202325',
+        background: '#0f172a',
         text: '#f5f5f5',
     },
 
@@ -170,6 +178,16 @@ export const darkTheme = {
         text: '#EAEAEA',
     },
 
+    drawer: {
+        background: 'linear-gradient(to bottom right, #1f2937, #111827)',
+        boxShadow: '-4px 0 12px rgba(0, 0, 0, 0.05)',
+        borderLeft: '1px solid #e2e8f0',
+        headerBg: 'linear-gradient(90deg, #ffffff 0%, #f8fafc 100%',
+        headerBorder: '1px solid #e2e8f0',
+        title: '#334155',
+        text: '#ffffff',
+    },
+
     table: {
         headerBackground: '#3A3F58',
         headerText: '#FFF',
@@ -189,9 +207,9 @@ export const darkTheme = {
     },
 
     footer: {
-        background: '#2B2B2B',
+        background: '#1e293b',
         text: '#EEE',
-        border: '#555',
+        border: '#334155',
     },
 
     qrCode: {

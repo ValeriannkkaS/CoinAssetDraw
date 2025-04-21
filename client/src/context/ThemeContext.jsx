@@ -1,6 +1,7 @@
 import { createContext, useContext, useState } from 'react';
 import { lightTheme, darkTheme } from '../lightVsDarkTheme.js';
 import { PropTypes } from 'prop-types';
+import { GlobalDrawerStyle } from './GlobalDrawerStyle.jsx';
 
 const ThemeContext = createContext({
     theme: lightTheme,
@@ -25,6 +26,7 @@ export function ThemeContextProvider({ children }) {
                 toggleTheme,
             }}
         >
+            <GlobalDrawerStyle theme={theme} />
             {children}
         </ThemeContext.Provider>
     );

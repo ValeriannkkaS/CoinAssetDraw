@@ -1,7 +1,8 @@
 import { useForm } from 'react-hook-form';
-import { Typography, Form, Input, Button, Checkbox } from 'antd';
+import { Typography, Form, Input } from 'antd';
 import { styled } from 'styled-components';
 import { useThemeContext } from '../../context/ThemeContext.jsx';
+import { GradientButton } from '../Buttons/GradientButton.jsx';
 
 export default function SignInForm() {
     const {
@@ -38,19 +39,6 @@ export default function SignInForm() {
         .ant-input-password {
             background: #1e293b;
             color: #f8fafc;
-        }
-    `;
-
-    const SubmitButton = styled(Button)`
-        width: 100%;
-        background: #3b82f6;
-        color: white;
-        font-weight: 600;
-        border: none;
-        margin-top: 1rem;
-
-        &:hover {
-            background: #2563eb;
         }
     `;
 
@@ -106,9 +94,16 @@ export default function SignInForm() {
                     </Form.Item>
 
                     <Form.Item label={null}>
-                        <SubmitButton type="primary" htmlType="submit">
+                        <GradientButton
+                            type="primary"
+                            htmlType="submit"
+                            style={{
+                                marginTop: '1rem',
+                                width: '100%',
+                            }}
+                        >
                             Sign In
-                        </SubmitButton>
+                        </GradientButton>
                     </Form.Item>
                 </StyledForm>
             </StyledFormWrapper>

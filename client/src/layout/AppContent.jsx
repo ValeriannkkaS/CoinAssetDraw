@@ -4,6 +4,7 @@ import { useCryptoContext } from '../context/CryptoContext.jsx';
 import PortfolioChartDistribution from '../components/PortfolioChartDistribution.jsx';
 import MarketCapBarChart from '../components/MarketCapBarChart.jsx';
 import PortfolioChartValueChange from '../components/PortfolioChartValueChange.jsx';
+import StyledCard from '../components/StyledCard.jsx';
 
 const contentStyle = {
     textAlign: 'center',
@@ -31,21 +32,23 @@ export default function AppContent() {
                 ...contentStyle,
             }}
         >
-            <Typography.Title
-                level={3}
-                style={{
-                    textAlign: 'center',
-                }}
-            >
-                Portfolio {/*потом будет для каждого портфеля*/}
-                {assets
-                    .map((asset) => {
-                        return asset.totalAmount * cryptoPriceMap[asset.id];
-                    })
-                    .reduce((accum, value) => (accum += value), 0)
-                    .toFixed(2)}
-                $
-            </Typography.Title>
+            <StyledCard style={{ marginBottom: '1rem' }}>
+                <Typography.Title
+                    level={3}
+                    style={{
+                        textAlign: 'start',
+                    }}
+                >
+                    Portfolio {/*потом будет для каждого портфеля*/}
+                    {assets
+                        .map((asset) => {
+                            return asset.totalAmount * cryptoPriceMap[asset.id];
+                        })
+                        .reduce((accum, value) => (accum += value), 0)
+                        .toFixed(2)}
+                    $
+                </Typography.Title>
+            </StyledCard>
             <Flex gap={15}>
                 <PortfolioChartValueChange />
                 <PortfolioChartDistribution />

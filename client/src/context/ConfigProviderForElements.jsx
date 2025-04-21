@@ -9,17 +9,8 @@ export default function ConfigProviderForElements({ children }) {
         <ConfigProvider
             theme={{
                 components: {
-                    Card: {
-                        colorTextDescription: theme.cards.text,
-                        colorBgContainer: theme.cards.background,
-                        colorBorderSecondary: theme.cards.border,
-                    },
                     Statistic: {
                         colorTextDescription: theme.cards.text,
-                    },
-                    Switch: {
-                        colorPrimary: theme.buttons.primary.background,
-                        algorithm: true,
                     },
                     Select: {
                         colorBgContainer: theme.select.background,
@@ -29,11 +20,6 @@ export default function ConfigProviderForElements({ children }) {
                     },
                     List: {
                         colorText: theme.cards.text,
-                    },
-                    Drawer: {
-                        colorBgElevated: theme.slidingSidebar.background,
-                        colorText: theme.slidingSidebar.text,
-                        colorIcon: theme.slidingSidebar.text,
                     },
                     Table: {
                         colorPrimary: theme.buttons.primary.background,
