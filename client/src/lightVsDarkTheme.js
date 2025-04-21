@@ -56,10 +56,10 @@ export const lightTheme = {
     },
 
     modal: {
-        background: '#FFFFFF',
+        background: 'linear-gradient(to bottom right, #ffffff, #f1f5f9)',
         shadow: 'rgba(0, 0, 0, 0.2)',
         border: '#D1D5DB',
-        text: '#212529',
+        text: '#334155',
     },
 
     table: {
@@ -161,7 +161,7 @@ export const darkTheme = {
     },
 
     modal: {
-        background: '#25292E',
+        background: 'linear-gradient(to bottom right, #1f2937, #111827)',
         shadow: 'rgba(255, 255, 255, 0.15)',
         border: '#3F464D',
         text: '#EAEAEA',

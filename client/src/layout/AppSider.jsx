@@ -14,6 +14,7 @@ import { useCryptoContext } from '../context/CryptoContext.jsx';
 import { useThemeContext } from '../context/ThemeContext.jsx';
 import { useState } from 'react';
 import AssetInfoModal from '../components/AssetInfoModal.jsx';
+import StyledModal from '../components/StyledModal.jsx';
 
 const siderStyle = {
     padding: '0.5rem',
@@ -120,7 +121,7 @@ export default function AppSider() {
                     </Card>
                 </Popover>
             ))}
-            <Modal
+            <StyledModal
                 title="information about your asset:"
                 open={modal}
                 onOk={() => setModal(false)}
@@ -130,7 +131,7 @@ export default function AppSider() {
                 destroyOnClose
             >
                 <AssetInfoModal coin={coin} />
-            </Modal>
+            </StyledModal>
         </Layout.Sider>
     );
 }

@@ -1,13 +1,4 @@
-import {
-    Layout,
-    Select,
-    Space,
-    Modal,
-    Drawer,
-    Flex,
-    Popover,
-    Badge,
-} from 'antd';
+import { Layout, Select, Space, Drawer, Flex, Popover, Badge } from 'antd';
 import { UserOutlined } from '@ant-design/icons';
 import { useCryptoContext } from '../context/CryptoContext.jsx';
 import { useState, useEffect } from 'react';
@@ -19,6 +10,7 @@ import { GradientButton } from '../components/Buttons/GradientButton.jsx';
 import { GradientAvatar } from '../components/Avatar.jsx';
 import UserInfoForPopover from '../components/UserInfoForPopover.jsx';
 import ThemeToggleButton from '../components/Buttons/ThemeToggleButton.jsx';
+import StyledModal from '../components/StyledModal.jsx';
 
 const headerStyle = {
     width: '100%',
@@ -120,7 +112,7 @@ export default function AppHeader() {
                 />
             </Flex>
 
-            <Modal
+            <StyledModal
                 title="information about cryptocurrency:"
                 open={modal}
                 onOk={() => setModal(false)}
@@ -128,7 +120,7 @@ export default function AppHeader() {
                 footer={null}
             >
                 <CoinInfoModal coin={coin} />
-            </Modal>
+            </StyledModal>
             <Drawer
                 size="large"
                 title="Add an asset at the current price, or specify the time"
