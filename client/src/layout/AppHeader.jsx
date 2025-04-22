@@ -11,6 +11,7 @@ import { GradientAvatar } from '../components/Avatar.jsx';
 import UserInfoForPopover from '../components/UserInfoForPopover.jsx';
 import ThemeToggleButton from '../components/Buttons/ThemeToggleButton.jsx';
 import StyledModal from '../components/StyledModal.jsx';
+import StyledSelect from '../components/StyledSelect.jsx';
 
 const headerStyle = {
     width: '100%',
@@ -80,11 +81,9 @@ export default function AppHeader() {
                         style={{ height: '1rem' }}
                     />
                 )}
-                <Select
+                <StyledSelect
                     style={{
-                        width: 250,
-                        flex: 1,
-                        maxWidth: 250,
+                        width: 270,
                     }}
                     open={select}
                     onSelect={handleSelect}

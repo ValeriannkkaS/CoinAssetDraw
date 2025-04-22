@@ -2,7 +2,7 @@ import { styled } from 'styled-components';
 import { Card } from 'antd';
 import { useThemeContext } from '../context/ThemeContext.jsx';
 
-const StyledCard1 = styled(Card)`
+const StyledCardWrapper = styled(Card)`
     &.ant-card {
         background: ${({ theme }) => theme.cards.background};
         border: 1px solid ${({ theme }) => theme.cards.border};
@@ -30,5 +30,5 @@ const StyledCard1 = styled(Card)`
 export default function StyledCard(props) {
     const { theme } = useThemeContext();
 
-    return <StyledCard1 theme={theme} {...props} />;
+    return <StyledCardWrapper theme={theme} {...props} />;
 }

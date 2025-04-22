@@ -51,9 +51,9 @@ export const lightTheme = {
 
     select: {
         background: '#FFFFFF',
+        dropdownBg: '#d6d3d3',
         text: '#212529',
-        border: '#CED4DA',
-        hover: '#E9ECEF',
+        icon: '#6b7280',
     },
 
     modal: {
@@ -174,10 +174,10 @@ export const darkTheme = {
     },
 
     select: {
-        background: '#25292E',
+        background: '#1e293b',
+        dropdownBg: '#27364b',
         text: '#EAEAEA',
-        border: '#3A3F45',
-        hover: '#30353A',
+        icon: '#cfcfcf',
     },
 
     modal: {

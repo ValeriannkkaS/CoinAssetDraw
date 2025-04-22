@@ -30,4 +30,11 @@ export const GlobalDrawerStyle = createGlobalStyle`
   .ant-drawer-close {
     color: ${({ theme }) => theme.drawer.closeIcon} !important;
   }
+
+  .ant-select-dropdown { // Стили для дропдауна селекта
+      background:${({ theme }) => theme.select.dropdownBg} !important;
+  }
+  .ant-space-item{
+      color: ${({ theme }) => theme.select.text}
+  }
 `;

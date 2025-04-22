@@ -20,6 +20,7 @@ import { GradientButton } from './Buttons/GradientButton.jsx';
 import { ConfirmButton } from './Buttons/ConfirmButton.jsx';
 import { CancelButton } from './Buttons/CancelButton.jsx';
 import StyledForm from './StyledForm.jsx';
+import StyledSelect from './StyledSelect.jsx';
 
 const validateMessages = {
     required: '${label} is required',
@@ -76,7 +77,7 @@ export default function AddAssetsForDraw({ onClose }) {
 
     if (!coin) {
         return (
-            <Select
+            <StyledSelect
                 style={{
                     width: '100%',
                 }}
@@ -152,9 +153,9 @@ export default function AddAssetsForDraw({ onClose }) {
             <Flex align="center">
                 <CoinImageDescription coin={coin} />
                 {/*элемент иконка монеты + название*/}
-                <CancelButton size="large" onClick={() => setCoin(null)}>
+                <GradientButton size="large" onClick={() => setCoin(null)}>
                     Return
-                </CancelButton>
+                </GradientButton>
             </Flex>
             <Divider />
             <StyledForm
