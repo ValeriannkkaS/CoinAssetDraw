@@ -37,4 +37,26 @@ export const GlobalDrawerStyle = createGlobalStyle`
   .ant-space-item{
       color: ${({ theme }) => theme.select.text}
   }
+  .ant-picker-panel-container {
+      background: ${({ theme }) => theme.form.commonFieldsBg} !important;
+      
+  }
+  .ant-picker-panel-container th,
+  .ant-picker-panel-container button,
+  .ant-picker-header-view{
+      color: ${({ theme }) => theme.form.inputColor} !important;
+
+  }
+  .ant-picker-cell.ant-picker-cell-in-view,
+  .ant-picker-time-panel-cell-inner{
+      color: ${({ theme }) => theme.form.inputColor} !important;
+      
+  }
+  .ant-picker-dropdown .ant-picker-time-panel-column >li.ant-picker-time-panel-cell-selected .ant-picker-time-panel-cell-inner {
+      background: ${({ theme }) => theme.form.commonFieldsBgHover} !important;
+  }
+  .ant-picker-cell{
+      color: ${({ theme }) => theme.form.inputPlaceholder} !important;
+  }
+  
 `;
