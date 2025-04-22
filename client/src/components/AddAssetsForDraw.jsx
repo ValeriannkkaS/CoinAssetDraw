@@ -9,6 +9,7 @@ import {
     InputNumber,
     DatePicker,
     Result,
+    Input,
 } from 'antd';
 import { useCryptoContext } from '../context/CryptoContext.jsx';
 import CoinImageDescription from './CoinImageDescription.jsx';
@@ -18,6 +19,7 @@ import PropTypes from 'prop-types';
 import { GradientButton } from './Buttons/GradientButton.jsx';
 import { ConfirmButton } from './Buttons/ConfirmButton.jsx';
 import { CancelButton } from './Buttons/CancelButton.jsx';
+import StyledForm from './StyledForm.jsx';
 
 const validateMessages = {
     required: '${label} is required',
@@ -155,7 +157,7 @@ export default function AddAssetsForDraw({ onClose }) {
                 </CancelButton>
             </Flex>
             <Divider />
-            <Form
+            <StyledForm
                 size="large"
                 form={form}
                 name="basic"
@@ -165,9 +167,7 @@ export default function AddAssetsForDraw({ onClose }) {
                 wrapperCol={{
                     span: 10,
                 }}
-                style={{
-                    maxWidth: 600,
-                }}
+                style={{ width: '100%' }}
                 initialValues={{
                     price: +coin.price.toFixed(2),
                 }}
@@ -211,6 +211,25 @@ export default function AddAssetsForDraw({ onClose }) {
                     />
                 </Form.Item>
 
+                <Form.Item
+                    label="Comission"
+                    name="comission"
+                    rules={[
+                        {
+                            required: true,
+                            type: 'number',
+                            min: 0,
+                        },
+                    ]}
+                >
+                    <InputNumber
+                        placeholder="Enter comission"
+                        style={{
+                            width: '100%',
+                        }}
+                    />
+                </Form.Item>
+
                 <Form.Item label="Date & Time" name="date&time">
                     <DatePicker
                         onChange={handleDateChange}
@@ -235,7 +254,7 @@ export default function AddAssetsForDraw({ onClose }) {
                         Add Asset
                     </ConfirmButton>
                 </Form.Item>
-            </Form>
+            </StyledForm>
         </>
     );
 }

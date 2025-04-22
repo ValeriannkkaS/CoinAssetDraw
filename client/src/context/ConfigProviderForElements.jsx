@@ -12,12 +12,6 @@ export default function ConfigProviderForElements({ children }) {
                     Statistic: {
                         colorTextDescription: theme.cards.text,
                     },
-                    Select: {
-                        colorBgContainer: theme.select.background,
-                        colorBgElevated: theme.select.background,
-                        colorBorder: theme.select.border,
-                        colorText: theme.select.text,
-                    },
                     List: {
                         colorText: theme.cards.text,
                     },
@@ -37,28 +31,6 @@ export default function ConfigProviderForElements({ children }) {
                     Result: {
                         colorTextHeading: theme.table.headerText,
                         colorTextDescription: theme.table.rowText,
-                    },
-                    Input: {
-                        colorBgContainer: theme.form.background,
-                        colorBgContainerDisabled:
-                            theme.form.inputDisabledBackground,
-                        colorTextPlaceholder: theme.form.inputPlaceholder,
-                        colorText: theme.form.inputText,
-                        colorTextDisabled: theme.form.inputDisabledText,
-                        labelColor: theme.cards.text,
-                    },
-                    InputNumber: {
-                        colorBgContainer: theme.form.background,
-                        colorBgContainerDisabled:
-                            theme.form.inputDisabledBackground,
-                        colorTextPlaceholder: theme.form.inputPlaceholder,
-                        colorText: theme.form.inputText,
-                        colorTextDisabled: theme.form.inputDisabledText,
-                    },
-                    DatePicker: {
-                        colorBgContainer: theme.form.background,
-                        colorTextPlaceholder: theme.form.inputPlaceholder,
-                        colorText: theme.form.inputText,
                     },
                     Popover: {
                         colorText: theme.cards.text,
