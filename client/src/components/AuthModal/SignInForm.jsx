@@ -1,19 +1,22 @@
-import { useForm } from 'react-hook-form';
+import { useForm, Controller } from 'react-hook-form';
 import { Typography, Form, Input } from 'antd';
-import { useThemeContext } from '../../context/ThemeContext.jsx';
 import { GradientButton } from '../Buttons/GradientButton.jsx';
 import StyledForm from '../StyledForm.jsx';
 
 export default function SignInForm() {
+    const [form] = Form.useForm();
+
     const {
-        register,
-        formState: { errors },
         handleSubmit,
-    } = useForm();
+        control,
+        formState: { isValid, errors, values, touchedFields },
+    } = useForm({
+        mode: 'onChange',
+    });
 
-    const { theme } = useThemeContext();
-
-    const onFinish = () => {};
+    const onFinish = (data) => {
+        alert(JSON.stringify(data));
+    };
     const onFinishFailed = () => {};
 
     return (
@@ -29,43 +32,90 @@ export default function SignInForm() {
             </Typography.Paragraph>
             <hr />
             <StyledForm
+                form={form}
                 size="large"
+                layout="vertical"
                 name="basic"
                 style={{ padding: '1rem' }}
                 initialValues={{ remember: true }}
-                onFinish={onFinish}
+                onFinish={handleSubmit((data) => onFinish(data))}
                 onFinishFailed={onFinishFailed}
                 autoComplete="off"
             >
                 <Form.Item
-                    label="Username"
-                    name="username"
-                    rules={[
-                        {
-                            required: true,
-                            message: 'Please input your username!',
-                        },
-                    ]}
+                    label="Username or email:"
+                    validateStatus={
+                        errors.username
+                            ? 'error'
+                            : values?.username
+                              ? 'success'
+                              : ''
+                    }
+                    help={errors?.username?.message || ''}
                 >
-                    <Input />
+                    <Controller
+                        placeholder="AntD Input"
+                        control={control}
+                        name="username"
+                        rules={{
+                            required: {
+                                value: true,
+                                message: 'This field must be filled in',
+                            },
+                            validate: {
+                                onlyLettersAndNumbers: (value) =>
+                                    /^[a-zA-Z0-9_.-]+$/.test(value) ||
+                                    'The name has only English letters and numbers.',
+                            },
+                        }}
+                        render={({ field }) => (
+                            <Input
+                                placeholder="Please enter your username"
+                                {...field}
+                            />
+                        )}
+                    />
                 </Form.Item>
 
                 <Form.Item
-                    label="Password"
-                    name="password"
-                    rules={[
-                        {
-                            required: true,
-                            message: 'Please input your password!',
-                        },
-                    ]}
+                    label="Password:"
+                    validateStatus={
+                        errors.password
+                            ? 'error'
+                            : values?.password
+                              ? 'success'
+                              : ''
+                    }
+                    help={errors?.password?.message || ''}
                 >
-                    <Input.Password />
+                    <Controller
+                        placeholder="AntD Input"
+                        control={control}
+                        name="password"
+                        rules={{
+                            required: {
+                                value: true,
+                                message: 'This field must be filled in',
+                            },
+                            validate: {
+                                noSpaces: (value) =>
+                                    /^\S+$/.test(value) ||
+                                    'Spaces are forbidden.',
+                            },
+                        }}
+                        render={({ field }) => (
+                            <Input.Password
+                                placeholder="Please enter your username"
+                                {...field}
+                            />
+                        )}
+                    />
                 </Form.Item>
 
                 <Form.Item label={null}>
                     <GradientButton
                         type="primary"
+                        disabled={!isValid || touchedFields.length === 0}
                         htmlType="submit"
                         style={{
                             marginTop: '1rem',
