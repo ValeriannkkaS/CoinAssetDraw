@@ -30,9 +30,21 @@ export const GlobalDrawerStyle = createGlobalStyle`
   .ant-drawer-close {
     color: ${({ theme }) => theme.drawer.closeIcon} !important;
   }
-
+    
+  .ant-select-item-option {
+      color: ${({ theme }) => theme.form.label} !important;
+      &.ant-select-item-option-active{
+          background: ${({ theme }) => theme.form.commonFieldsBgHover} !important;
+          &:focus-within, 
+          &:focus{
+              background: ${({ theme }) => theme.form.commonFieldsBgHover} !important;
+          }
+      }
+  }
+  
   .ant-select-dropdown { // Стили для дропдауна селекта
       background:${({ theme }) => theme.select.dropdownBg} !important;
+      color: ${({ theme }) => theme.form.label} !important;
   }
   .ant-space-item{
       color: ${({ theme }) => theme.select.text}

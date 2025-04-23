@@ -2,6 +2,7 @@ import { Table, Tag, Typography, Flex } from 'antd';
 import { useState } from 'react';
 import { useCryptoContext } from '../context/CryptoContext.jsx';
 import { PropTypes } from 'prop-types';
+import StyledTable from './StyledTable.jsx';
 
 export default function AssetInfoTableForModal({ coin }) {
     const [pageSize, setPageSize] = useState('5');
@@ -73,7 +74,7 @@ export default function AssetInfoTableForModal({ coin }) {
                     Your purchases of {coin.id}:
                 </Typography.Title>
             </Flex>
-            <Table
+            <StyledTable
                 columns={columns}
                 dataSource={dataSource}
                 scroll={{ x: 700 }}

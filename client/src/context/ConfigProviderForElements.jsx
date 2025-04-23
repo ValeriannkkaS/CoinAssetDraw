@@ -15,15 +15,6 @@ export default function ConfigProviderForElements({ children }) {
                     List: {
                         colorText: theme.cards.text,
                     },
-                    Table: {
-                        colorPrimary: theme.buttons.primary.background,
-                        colorBgContainer: theme.table.rowBackground,
-                        headerBg: theme.table.headerBackground,
-                        borderColor: theme.table.border,
-                        headerColor: theme.table.headerText,
-                        colorText: theme.table.rowText,
-                        algorithm: true, // Enable algorithm
-                    },
                     Typography: {
                         colorText: theme.table.rowText,
                         colorTextHeading: theme.modal.text,
