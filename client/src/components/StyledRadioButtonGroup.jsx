@@ -16,7 +16,8 @@ const StyledRadioGroupWrapper = styled(Radio.Group)`
         background: linear-gradient(135deg, #6a11cb 0%, #00f2fe 100%);
         transition: 0.5s all;
         &:hover {
-            background: linear-gradient(135deg, #00f2fe 0%, #6a11cb 100%);
+            background: linear-gradient(135deg, #6a11cb 0%, #00f2fe 100%);
+            opacity: 0.8;
             transition: 0.5s all;
         }
     }
