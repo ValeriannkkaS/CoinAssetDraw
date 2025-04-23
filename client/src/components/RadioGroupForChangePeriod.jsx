@@ -1,6 +1,7 @@
 import { PropTypes } from 'prop-types';
 import { Radio } from 'antd';
 import { useChartDataContext } from '../context/ChartDataContext.jsx';
+import StyledRadioButton from './StyledRadioButtonGroup.jsx';
 
 export default function RadioGroupForChangePeriod() {
     const { changePeriod } = useChartDataContext();
@@ -17,7 +18,7 @@ export default function RadioGroupForChangePeriod() {
 
     return (
         <>
-            <Radio.Group
+            <StyledRadioButton
                 block
                 options={optionsForRadio}
                 defaultValue="all"
