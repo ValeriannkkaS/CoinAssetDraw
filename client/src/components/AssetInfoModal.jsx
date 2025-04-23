@@ -7,6 +7,7 @@ import RadioGroupForChangePeriod from './RadioGroupForChangePeriod.jsx';
 import ChartForModal from './ChartForModal.jsx';
 import { useChartDataContext } from '../context/ChartDataContext.jsx';
 import { useEffect } from 'react';
+import StyledTabs from './StyledTabs.jsx';
 
 export default function AssetInfoModal({ coin }) {
     return (
@@ -19,7 +20,7 @@ export default function AssetInfoModal({ coin }) {
                 {coin.price.toFixed(2)}$
             </Typography.Paragraph>
             <Divider />
-            <Tabs
+            <StyledTabs
                 defaultActiveKey="1"
                 items={[
                     {
