@@ -2,6 +2,10 @@ import { useForm, Controller } from 'react-hook-form';
 import { Typography, Form, Input } from 'antd';
 import { GradientButton } from '../Buttons/GradientButton.jsx';
 import StyledForm from '../StyledForm.jsx';
+import {
+    rulesForValidatePasswordSignIn,
+    rulesForValidateUsernameOrEmailSignIn,
+} from './rulesForValidateFields.js';
 
 export default function SignInForm() {
     const {
@@ -49,17 +53,7 @@ export default function SignInForm() {
                     <Controller
                         control={control}
                         name="username"
-                        rules={{
-                            required: {
-                                value: true,
-                                message: 'This field must be filled in',
-                            },
-                            validate: {
-                                onlyLettersAndNumbers: (value) =>
-                                    /^[a-zA-Z0-9_.-]+$/.test(value) ||
-                                    'The name has only English letters and numbers.',
-                            },
-                        }}
+                        rules={rulesForValidateUsernameOrEmailSignIn}
                         render={({ field }) => (
                             <Input
                                 placeholder="Please enter your username"
@@ -83,17 +77,7 @@ export default function SignInForm() {
                     <Controller
                         control={control}
                         name="password"
-                        rules={{
-                            required: {
-                                value: true,
-                                message: 'This field must be filled in',
-                            },
-                            validate: {
-                                noSpaces: (value) =>
-                                    /^\S+$/.test(value) ||
-                                    'Spaces are forbidden.',
-                            },
-                        }}
+                        rules={rulesForValidatePasswordSignIn}
                         render={({ field }) => (
                             <Input.Password
                                 placeholder="Please enter your password"

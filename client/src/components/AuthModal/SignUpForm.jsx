@@ -2,6 +2,12 @@ import { useForm, Controller } from 'react-hook-form';
 import { Form, Input, Typography } from 'antd';
 import StyledForm from '../StyledForm.jsx';
 import { GradientButton } from '../Buttons/GradientButton.jsx';
+import {
+    rulesForValidateConfirmPasswordSignUp,
+    rulesForValidateEmailSignUp,
+    rulesForValidatePasswordSignUp,
+    rulesForValidateUsernameSignUp,
+} from './rulesForValidateFields.js';
 
 export default function SignUpForm() {
     const {
@@ -46,24 +52,7 @@ export default function SignUpForm() {
                     <Controller
                         control={control}
                         name="email"
-                        rules={{
-                            required: {
-                                value: true,
-                                message: 'This field must be filled in',
-                            },
-                            validate: {
-                                incorrectFormat: (value) =>
-                                    /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value) ||
-                                    'Incorrect email address',
-                                noSpaces: (value) =>
-                                    /^\S+$/.test(value) ||
-                                    'Spaces are forbidden.',
-                                incorrectDomain: (value) =>
-                                    /@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(
-                                        value,
-                                    ) || 'incorrect domain',
-                            },
-                        }}
+                        rules={rulesForValidateEmailSignUp}
                         render={({ field }) => (
                             <Input
                                 placeholder="Please, input your e-mail adress"
@@ -87,44 +76,7 @@ export default function SignUpForm() {
                     <Controller
                         control={control}
                         name="username"
-                        rules={{
-                            required: {
-                                value: true,
-                                message: 'This field must be filled in',
-                            },
-                            minLength: {
-                                value: 5,
-                                message:
-                                    'Username must be greater than 5 characters',
-                            },
-                            maxLength: {
-                                value: 14,
-                                message: 'Maximum characters of username is 14',
-                            },
-                            validate: {
-                                forbiddenSymbols: (value) =>
-                                    /^[a-zA-Z0-9_.-]+$/.test(value) ||
-                                    'Only Latin letters (a-z), numbers (0-9) and the characters _ . -',
-                                dontStartsWithLetter: (value) =>
-                                    /^[a-zA-Z]/.test(value) ||
-                                    'The name must begin with a letter (a-z, A-Z)',
-                                noSpaces: (value) =>
-                                    /^\S+$/.test(value) ||
-                                    'Spaces are forbidden.',
-                                endWithForbiddenSymbols: (value) =>
-                                    /.*[a-zA-Z0-9]$/.test(value) ||
-                                    'A name cannot end in _ . -',
-                                noRepeatedSpecials: (value) =>
-                                    /^(?!.*[_.-]{2})[a-zA-Z0-9_.-]+$/.test(
-                                        value,
-                                    ) ||
-                                    'The characters _ . - cannot be repeated',
-                                reservedNames: (value) =>
-                                    !/^(admin|root|support|system)$/i.test(
-                                        value,
-                                    ) || 'Reserved username',
-                            },
-                        }}
+                        rules={rulesForValidateUsernameSignUp}
                         render={({ field }) => (
                             <Input
                                 placeholder="Please enter your username"
@@ -148,41 +100,7 @@ export default function SignUpForm() {
                     <Controller
                         control={control}
                         name="password"
-                        rules={{
-                            required: {
-                                value: true,
-                                message: 'This field must be filled in',
-                            },
-                            minLength: {
-                                value: 8,
-                                message:
-                                    'Password must be greater than 8 characters',
-                            },
-                            maxLength: {
-                                value: 20,
-                                message: 'Maximum characters of password is 20',
-                            },
-                            validate: {
-                                hasLatin: (value) =>
-                                    /^[\x00-\x7F]+$/.test(value) ||
-                                    'Allowed only English Letters',
-                                hasLowercase: (value) =>
-                                    /[a-z]/.test(value) ||
-                                    'Password must include one lowercase letter',
-                                hasUppercase: (value) =>
-                                    /[A-Z]/.test(value) ||
-                                    'Password must include one uppercase letter',
-                                hasNumber: (value) =>
-                                    /\d/.test(value) ||
-                                    'Password must include one number',
-                                hasSpecialSymbol: (value) =>
-                                    /[^a-zA-Z0-9]/.test(value) ||
-                                    'password must include one special symbol (!, ?, &)',
-                                noSpaces: (value) =>
-                                    /^\S+$/.test(value) ||
-                                    'Spaces are forbidden.',
-                            },
-                        }}
+                        rules={rulesForValidatePasswordSignUp}
                         render={({ field }) => (
                             <Input.Password
                                 placeholder="Please enter your password"
@@ -207,15 +125,12 @@ export default function SignUpForm() {
                         control={control}
                         name="confirmPassword"
                         rules={{
-                            required: {
-                                value: true,
-                                message: 'This field must be filled in',
-                            },
                             validate: {
                                 isEqualPassword: (value) =>
-                                    value === getValues('password') ||
+                                    value === getValues('password') || // не стал выносить в файл.
                                     'Passwords must match',
                             },
+                            ...rulesForValidateConfirmPasswordSignUp,
                         }}
                         render={({ field }) => (
                             <Input.Password
