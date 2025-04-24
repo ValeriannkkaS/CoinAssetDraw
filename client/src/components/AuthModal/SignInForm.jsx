@@ -4,8 +4,6 @@ import { GradientButton } from '../Buttons/GradientButton.jsx';
 import StyledForm from '../StyledForm.jsx';
 
 export default function SignInForm() {
-    const [form] = Form.useForm();
-
     const {
         handleSubmit,
         control,
@@ -17,7 +15,6 @@ export default function SignInForm() {
     const onFinish = (data) => {
         alert(JSON.stringify(data));
     };
-    const onFinishFailed = () => {};
 
     return (
         <>
@@ -32,15 +29,11 @@ export default function SignInForm() {
             </Typography.Paragraph>
             <hr />
             <StyledForm
-                form={form}
                 size="large"
                 layout="vertical"
                 name="basic"
                 style={{ padding: '1rem' }}
-                initialValues={{ remember: true }}
                 onFinish={handleSubmit((data) => onFinish(data))}
-                onFinishFailed={onFinishFailed}
-                autoComplete="off"
             >
                 <Form.Item
                     label="Username or email:"
@@ -54,7 +47,6 @@ export default function SignInForm() {
                     help={errors?.username?.message || ''}
                 >
                     <Controller
-                        placeholder="AntD Input"
                         control={control}
                         name="username"
                         rules={{
@@ -89,7 +81,6 @@ export default function SignInForm() {
                     help={errors?.password?.message || ''}
                 >
                     <Controller
-                        placeholder="AntD Input"
                         control={control}
                         name="password"
                         rules={{
@@ -105,7 +96,7 @@ export default function SignInForm() {
                         }}
                         render={({ field }) => (
                             <Input.Password
-                                placeholder="Please enter your username"
+                                placeholder="Please enter your password"
                                 {...field}
                             />
                         )}
